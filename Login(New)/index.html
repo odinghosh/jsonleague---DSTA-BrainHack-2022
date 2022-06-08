@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CSS LINKING -->
+    <link rel="stylesheet" href="general.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="queries.css" />
+
+    <!--INTER GOOGLE FONTS LINK -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- LINKING IONICONS -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    <!-- LINKING ICONIFY -->
+
+    <title>Fitness App &dash; Gold is closer than you realise</title>
+  </head>
+  <body>
+    <div class="trainer-img">
+      <img src="personal-training-loginpage.svg" alt="trainer with friend" />
+    </div>
+    <div class="login-heading">
+      <p class="heading">Create Account</p>
+    </div>
+
+    <form class="login-form" name="sign-up" netlify>
+      <div class="input-email">
+        <input
+          id="email"
+          type="email"
+          placeholder="email"
+          name="email"
+          required
+        />
+
+        <ion-icon
+          name="mail-outline"
+          class="input-img input-img--email"
+        ></ion-icon>
+      </div>
+
+      <div class="input-password">
+        <input
+          id="password"
+          type="text"
+          placeholder="password"
+          name="password"
+          required
+        />
+
+        <ion-icon
+          name="key-outline"
+          class="input-img input-img--password"
+        ></ion-icon>
+      </div>
+
+      <div class="input-confirm-password">
+        <input
+          id="confirm-password"
+          type="text"
+          placeholder=" confirm password"
+          name="password"
+          required
+        />
+
+        <ion-icon
+          name="key-outline"
+          class="input-img input-img--confirm-password"
+        ></ion-icon>
+      </div>
+
+      <div class="btn-login">
+        <a href="#" class="btn btn--login">
+          Login<ion-icon
+            name="arrow-forward-outline"
+            class="btn--img"
+          ></ion-icon>
+        </a>
+      </div>
+    </form>
+
+    <p class="login-footer">
+      Already have an account?
+      <a href="#" class="login-footer--sign-up">Sign In</a>
+    </p>
+  </body>
+</html>
