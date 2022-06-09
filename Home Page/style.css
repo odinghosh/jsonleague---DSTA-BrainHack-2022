@@ -5,7 +5,9 @@ body {
 }
 
 .home-heading {
+  padding-top: 7rem;
   display: flex;
+  justify-content: space-evenly;
 }
 
 .home-greeting {
@@ -13,7 +15,9 @@ body {
   letter-spacing: -1.8px;
   /* display: flex; */
   width: 57.5%;
-  padding: 10.2rem 0rem 3rem 0rem;
+  /* padding: 0rem 0rem 3rem 0rem; */
+
+  align-self: center;
 }
 
 .home--header {
@@ -30,17 +34,30 @@ body {
   color: #b0b0b0;
 }
 
+.days-worked-out {
+  align-self: center;
+}
+
 .days-worked-out-circle {
   filter: drop-shadow(0 0rem 3.2rem rgba(0, 0, 0, 0.06));
-  position: relative;
+  /* position: relative; */
 }
 
 .days-worked-out--text {
   font-size: 3rem;
   text-align: center;
+  /* position: absolute; */
+  padding-top: 2rem;
+}
+
+.number-icon {
+  font-size: 18rem;
+  color: #fc6681;
   position: absolute;
-  top: 31rem;
-  right: 6.65rem;
+  /* top: 7.7%;
+  right: 18%; */
+  top: 10.7rem;
+  right: 14.1rem;
 }
 
 /* horizonatal scroll */
