@@ -1,0 +1,155 @@
+body {
+  background: url('./wave.svg') no-repeat bottom; 
+  height: 100vh;
+  background-size: 1150%;
+  /* height: 100%; */
+}
+
+.waves-back {
+  z-index: -1;
+  padding-top: 18rem;
+}
+
+.trainer-img img {
+  width: 48rem;
+  height: auto;
+}
+
+.trainer-img {
+  /* top: 50%;
+  left: 50%; */
+  transform: translate(21%, 4rem);
+}
+
+.login-heading {
+  padding: 7rem 9rem 3rem 9rem;
+}
+
+.heading {
+  font-size: 8rem;
+  /* font-weight: 500; */
+  letter-spacing: -1.8px;
+  text-decoration: underline 2px;
+  text-underline-offset: 4px;
+}
+
+.subtext {
+  padding-top: 1rem;
+  font-size: 4rem;
+  text-decoration: underline;
+  font-weight: 800;
+}
+
+.login-form {
+  padding-top: 10rem;
+  display: grid;
+
+  row-gap: 3.5rem;
+  position: relative;
+}
+
+.login-form input,
+.login-form select {
+  font-size: 3.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  width: 100%;
+  padding: 4rem 6rem 4rem 13rem;
+
+  font-family: inherit;
+  color: #3e3e3e;
+  border: none;
+  background-color: white;
+  border-radius: 50px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.login-form input::placeholder {
+  color: #c4c1ff;
+}
+
+.input-img {
+  position: absolute;
+  height: 6rem;
+  width: 6rem;
+  top: 0;
+  left: 0;
+}
+
+.input-email,
+.input-password,
+.input-confirm-password {
+  text-align: center;
+}
+
+#email,
+#password,
+#confirm-password {
+  width: 80%;
+}
+
+.input-img--email {
+  top: 13rem;
+  left: 12.4rem;
+}
+
+.input-img--password {
+  top: 28.5rem;
+  left: 12.4rem;
+}
+
+.input-img--confirm-password {
+  top: 44rem;
+  left: 12.4rem;
+}
+
+.btn-login {
+  text-align: right;
+  display: inline-block;
+
+  padding-right: 10%;
+  padding-bottom: 7rem;
+}
+
+.btn--login {
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 3.5rem !important;
+  color: #fdf2e9;
+
+  background-color: #fc6681;
+
+  position: relative;
+  padding-right: 10rem;
+  align-self: right;
+
+  width: 30rem;
+}
+
+.btn--img {
+  width: 8rem;
+  height: 8rem;
+
+  position: absolute;
+  bottom: 1.9rem;
+  right: 3.4rem;
+}
+
+.login-footer {
+  font-size: 3.2rem;
+  text-align: center;
+  font-weight: 800;
+  color: #3f5a99;
+}
+
+.login-footer--sign-up:link,
+.login-footer--sign-up:visited {
+  text-decoration: none;
+  color: #fc6681;
+}
+
+.login-footer--sign-up:hover,
+.login-footer--sign-up:active {
+}
