@@ -1,16 +1,16 @@
 import React from 'react'
 import trainerImage from './personal-training-loginpage.svg'
-import waveImage from './wave.svg'
-import './style.css'
-import './general.css'
-import './queries.css'
+
+import '../styles/style.css'
+import '../styles/general.css'
+import '../styles/queries.css'
 
 
 
 
 
 export default function() {
-    return <div style={{backgroundImage: waveImage }}>
+    return <div>
    
     <div class="trainer-img">
       <img src={trainerImage} alt="trainer with friend" />
