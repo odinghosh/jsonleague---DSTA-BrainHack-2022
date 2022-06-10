@@ -1,0 +1,139 @@
+/* HOME PAGE */
+
+body {
+  background-color: #f0efff;
+}
+
+.home-heading {
+  padding-top: 7rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.home-greeting {
+  /* font-size: 11rem; */
+  letter-spacing: -1.8px;
+  /* display: flex; */
+  width: 57.5%;
+  /* padding: 0rem 0rem 3rem 0rem; */
+
+  align-self: center;
+}
+
+.home--header {
+  font-size: 7.9rem;
+  font-weight: 600;
+  letter-spacing: -1.8px;
+  padding-bottom: 2rem;
+}
+
+.home--subtext {
+  font-size: 5rem;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+  color: #b0b0b0;
+}
+
+.days-worked-out {
+  align-self: center;
+}
+
+.days-worked-out-circle {
+  filter: drop-shadow(0 0rem 3.2rem rgba(0, 0, 0, 0.06));
+  /* position: relative; */
+}
+
+.days-worked-out--text {
+  font-size: 3rem;
+  text-align: center;
+  /* position: absolute; */
+  padding-top: 2rem;
+}
+
+.number-icon {
+  font-size: 18rem;
+  color: #fc6681;
+  position: absolute;
+  /* top: 7.7%;
+  right: 18%; */
+  top: 10.7rem;
+  right: 14.1rem;
+}
+
+/* horizonatal scroll */
+
+div.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+  margin: 0 4.5rem 0 4.5rem;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* what are we doing today  */
+.home-scroll-menu {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.home-scroll-header {
+  font-size: 4rem;
+  padding-bottom: 4rem;
+}
+
+.home-scroll--item:link,
+.home-scroll--item:visited {
+  display: inline-block;
+  color: black;
+  margin-right: 1.5rem;
+
+  font-size: 3rem;
+  text-decoration: none;
+
+  background-color: white;
+  padding: 3rem 4rem;
+  border-radius: 3rem;
+  /* display: flex; */
+}
+
+.home-scroll--item:active,
+.home-scroll--item:hover {
+}
+
+.home-scroll--item:last-child {
+  margin-right: 0;
+}
+
+.home-scroll--icon {
+  width: 7rem;
+  height: 7rem;
+  color: #6c63ff;
+
+  display: inline-block;
+  justify-content: center;
+  align-self: center;
+  padding-right: 2rem;
+}
+
+.flex-please {
+  display: flex;
+}
+
+.home-scroll--heading {
+  color: #6c63ff;
+  font-size: 5rem;
+  letter-spacing: -1px;
+
+  padding-bottom: 4px;
+}
+
+.home-scroll--subtext {
+  font-size: 3rem;
+}

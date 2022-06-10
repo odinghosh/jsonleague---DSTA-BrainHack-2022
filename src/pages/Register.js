@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {useNavigate} from "react-router-dom"
+
 import trainerImage from './personal-training-loginpage.svg'
 
 import '../styles/style.css'
@@ -10,6 +12,11 @@ import '../styles/queries.css'
 
 
 export default function() {
+
+    const [registered, setRegistered] = useState(false);
+    const navigate = useNavigate();
+
+    
     return <div>
    
     <div class="trainer-img">
@@ -50,7 +57,7 @@ export default function() {
         ></ion-icon>
       </div>
 
-      <div class="input-confirm-password">
+      { !registered && <div class="input-confirm-password">
         <input
           id="confirm-password"
           type="text"
@@ -64,10 +71,18 @@ export default function() {
           class="input-img input-img--confirm-password"
         ></ion-icon>
       </div>
+      }
 
       <div class="btn-login">
-        <a href="#" class="btn btn--login">
-          Login<ion-icon
+        <a onClick={() =>{
+          if(registered){
+          navigate('../home', {replace:true})
+          }
+        }} href="#" class="btn btn--login">{
+        !registered? 'Register':'login'
+        }
+        
+        <ion-icon
             name="arrow-forward-outline"
             class="btn--img"
           ></ion-icon>
@@ -77,7 +92,7 @@ export default function() {
 
     <p class="login-footer">
       Already have an account?
-      <a href="#" class="login-footer--sign-up">Sign In</a>
+      <a href="#" class="login-footer--sign-up"  onClick={()=> {setRegistered(!registered)}}>Sign In</a>
     </p>
  
     
