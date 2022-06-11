@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useNavigate} from "react-router-dom"
-
 import trainerImage from './personal-training-loginpage.svg'
+import Cookies from 'universal-cookie'
 
 import '../styles/style.css'
 import '../styles/general.css'
@@ -11,6 +11,10 @@ import '../styles/queries.css'
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+
+//Initialise cookies
+const cookies = new Cookies()
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyBaxnPfnVYZKGzgo07O43S3OykoMl1qS-g",
@@ -37,6 +41,24 @@ export default function() {
 
     const navigate = useNavigate();
 
+ 
+    
+
+    // This block of code will run only once when the page is rendered
+    useEffect(()=>{
+
+      //checking if a person is authenticated already
+      var uid = cookies.get('uid')
+      if(uid){
+        navigate('../home')
+
+      }
+
+
+    })
+   
+
+    
     
     return <div>
    
@@ -67,7 +89,7 @@ export default function() {
       <div class="input-password">
         <input
           id="password"
-          type="text"
+          type="password"
           placeholder="password"
           name="password"
           required
@@ -83,7 +105,7 @@ export default function() {
       { !registered && <div class="input-confirm-password">
         <input
           id="confirm-password"
-          type="text"
+          type="password"
           placeholder=" confirm password"
           name="password"
           onChange={(e) => {
@@ -112,7 +134,9 @@ export default function() {
                     .then((userCredential) => {
                         // Signed in
                         const user = userCredential.user;
-                        navigate('../home', {replace:true})
+                        cookies.set('uid', user.uid, {path:'/'})
+                        console.log(user.uid)
+                        navigate('../home')
                         // ...
                     })
                     .catch((error) => {
@@ -129,6 +153,7 @@ export default function() {
                         // Signed in
                         const user = userCredential.user;
                         console.log("New User "+email+" has registered")
+                        cookies.set('uid', user.uid, {path: '/'})
                         navigate('../home', {replace:true})
                         // ...
                     })

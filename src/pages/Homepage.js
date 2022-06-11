@@ -1,8 +1,11 @@
 import React from 'react'
 import '../styles/HomeStyle.css'
+import { useNavigate } from 'react-router-dom';
 
 
 export default function (){
+
+    const navigate = useNavigate();
     return <div>
     
 
@@ -43,7 +46,9 @@ export default function (){
         </div>
       </a>
 
-      <a className="home-scroll--item" href="#">
+      <a onClick={() => {
+        navigate('/pushup', {replace:true})
+      }} className="home-scroll--item" href="#">
         <div className="flex-please">
           <ion-icon name="barbell-outline" className="home-scroll--icon"></ion-icon>
           <div>
