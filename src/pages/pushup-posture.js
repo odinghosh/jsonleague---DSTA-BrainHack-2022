@@ -1,11 +1,13 @@
-import React,{useRef, useState, useEffect} from "react"
+import React,{useRef, useState, useEffect, useWindowDimensions} from "react"
 import Webcam from "react-webcam"
 //import * as posenet from '@tensorflow-models/posenet';
 import * as poseDetection from '@tensorflow-models/pose-detection'
 import * as tf from  '@tensorflow/tfjs-core'
 import '@tensorflow/tfjs-backend-webgl'
-import '@tensorflow/tfjs-backend-wasm'
+
 import {useSpeechSynthesis} from 'react-speech-kit'
+
+tf.backend('webgl')
 
 
 
@@ -13,6 +15,9 @@ import {useSpeechSynthesis} from 'react-speech-kit'
 
 
 export default function()  {
+  var width = window.innerWidth
+  var height = window.innerHeight - 200
+
   const [prevStatus, setPrevStatus] = useState(false)
   const {speak, speaking, cancel} = useSpeechSynthesis()
     const webCamRef = useRef(null)
@@ -26,14 +31,14 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
     if(!prevStatus){
       cancel()
       speak({text:'fix posture'})
+      setstatusText('Not Straight')
     
     
 
     } else {
       cancel()
-     
-
-    
+      speak({text: 'continue'})
+      setstatusText('Straight')
     }
   }, [prevStatus])
 
@@ -78,11 +83,11 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
             const videoWidth = webCamRef.current.video.videoWidth
             const videoHeight = webCamRef.current.video.videoHeight
 
-            video.width = 640
-            video.height = 480
+            video.width = videoWidth
+            video.height = videoHeight
             const ctx = canvasRef.current.getContext("2d") 
-            canvasRef.current.width = 640
-            canvasRef.current.height = 480
+            canvasRef.current.width = videoWidth
+            canvasRef.current.height = videoHeight
             
          
         
@@ -116,17 +121,16 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
             var angle = (Math.abs(radians*(180.0/Math.PI)))
 
             if(angle > 172 && angle < 190){
-               
-                setstatusText('Straight')
+              
+               if(!prevStatus){
                 setPrevStatus(true)
+               }
                 
-             
-             
-          
 
             } else {
-                setstatusText('Not Straight')
-                setPrevStatus(false)
+              if(prevStatus){
+                 setPrevStatus(false)
+              }
                             
             }
           }
@@ -144,7 +148,7 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
 
     }
 
-    return <div><h1 style={{fontSize: 100}}>
+    return <div><h1 style={{fontSize: 100, textAlign:'center'}}>
    {statusText}
 </h1> <Webcam style={{position:'absolute',
  marginLeft:'auto', 
@@ -152,8 +156,8 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
  left:'0', 
  right:'0', 
  textAlign:'center', 
- height:480, 
- width:640}} ref={webCamRef} />
+ height:height, 
+ width:width}} ref={webCamRef} />
  
  <canvas ref={canvasRef}
  style={{position:'absolute',
@@ -162,7 +166,7 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
  left:'0', 
  right:'0', 
  textAlign:'center', 
- height:480, 
- width:640}}
+ height:height, 
+ width:width}}
  />
  </div>}
