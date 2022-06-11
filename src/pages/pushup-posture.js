@@ -1,7 +1,9 @@
-import React,{useRef} from "react"
+import React,{useRef, useState} from "react"
 import Webcam from "react-webcam"
-import * as posenet from '@tensorflow-models/posenet';
-import * as tf from  '@tensorflow/tfjs'
+//import * as posenet from '@tensorflow-models/posenet';
+import * as poseDetection from '@tensorflow-models/pose-detection'
+import * as tf from  '@tensorflow/tfjs-core'
+import '@tensorflow/tfjs-backend-webgl'
 
 
 
@@ -11,6 +13,8 @@ import * as tf from  '@tensorflow/tfjs'
 export default function()  {
     const webCamRef = useRef(null)
 const canvasRef = useRef(null)
+const [statusText, setstatusText] = useState('Not Straight')
+const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING}
 
 
 
@@ -21,24 +25,24 @@ const canvasRef = useRef(null)
    
     
 
-    if (keypoint.part == 'nose') {
+    if (score > 0.2 ) {
       //const circle = new Path2D();
       //circle.arc(keypoint.position.x, keypoint.position.y, 100, 0, 2 * Math.PI);
       //ctx.fill(circle);
       //ctx.stroke(circle);
 
-      ctx.fillRect(keypoint.position.x, keypoint.position.y,10,10);
-      if(keypoint.part == 'nose'){
-        console.log(keypoint.position.x)
-        console.log(keypoint.position.y)
-      }
+      ctx.fillStyle = '#FF0000'
+      ctx.fillRect(keypoint.x, keypoint.y,10,10);
+     
+      
     }
   }
 
     const runPosenet = async () => {
-        const net = await posenet.load({inputResolution: {width:640, height:480}, scale:1});
+        //const net = await posenet.load({inputResolution: {width:640, height:480}, scale:1});
+        const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig)
         setInterval(()=> {
-            detect(net)
+            detect(detector)
         }, 100)
     }
 
@@ -54,20 +58,60 @@ const canvasRef = useRef(null)
 
             video.width = 640
             video.height = 480
+            const ctx = canvasRef.current.getContext("2d") 
+            canvasRef.current.width = 640
+            canvasRef.current.height = 480 
             
          
         
 
-            const pose = await net.estimateSinglePose(video)
-            const ctx = canvasRef.current.getContext("2d") 
-            canvasRef.current.width = 640
-            canvasRef.current.height = 480 
+            const pose = await net.estimatePoses(video)
+           // console.log(pose[0].keypoints)
+            
+            //for(var i = 0; i < 17;i++ ){
+              //drawKeypoint(pose[0].keypoints[i], ctx)
+             
+              
+            //}
+            //console.log(pose)
+           
             // console.log(ctx)
-            //console.log(pose['keypoints'])
-            for (var i = 0; i < pose['keypoints'].length; i++){
-              drawKeypoint(pose['keypoints'][i], ctx)
+            var LS = pose[0].keypoints[5]
+            var LH = pose[0].keypoints[11]
+            var LK = pose[0].keypoints[13]
+            
 
+            drawKeypoint(LS,ctx)
+            drawKeypoint(LH, ctx)
+            drawKeypoint(LK, ctx)
+
+          
+            
+
+           if(LS.score > 0.2 && LH.score > 0.2 && LK.score > 0.2){
+              var radians = Math.atan2(LK.y - LH.y, LK.x - LH.x) - Math.atan2(LS.y - LH.y, LS.x - LH.x)
+            var angle = (Math.abs(radians*(180.0/Math.PI)))
+
+            if(angle > 170 && angle < 190){
+              if(statusText == 'Not Straight'){
+                setstatusText('Straight')
+              }
+          
+
+            } else {
+              if(statusText == 'Straight'){
+                setstatusText('Not Straight')
+              }
             }
+          }
+
+    
+          //}
+
+            //for (var i = 0; i < pose['keypoints'].length; i++){
+              //drawKeypoint(pose['keypoints'][i], ctx)
+
+            //}
             //console.log(pose)
 
         }
@@ -75,8 +119,8 @@ const canvasRef = useRef(null)
     }
 
     runPosenet();
-    return <div><h1>
-    Hello World
+    return <div><h1 style={{fontSize: 100}}>
+   {statusText}
 </h1> <Webcam style={{position:'absolute',
  marginLeft:'auto', 
  marginRight:'auto', 
