@@ -52,7 +52,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -65,7 +65,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -78,7 +78,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="">
             <div class="flex-down-please">
               <ion-icon
                 name="footsteps-outline"
@@ -91,7 +91,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="">
             <div class="flex-down-please">
               <ion-icon
                 name="footsteps-outline"
@@ -116,7 +116,7 @@ export default function(){
         <div class="exercise-body-menu">
          
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -129,7 +129,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="">
             <div class="flex-down-please">
               <ion-icon
                 name="fitness-outline"
@@ -142,7 +142,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="">
             <div class="flex-down-please">
               <ion-icon
                 name="footsteps-outline"
