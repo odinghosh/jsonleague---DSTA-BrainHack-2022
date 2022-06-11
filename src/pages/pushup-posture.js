@@ -7,12 +7,6 @@ import '@tensorflow/tfjs-backend-webgl'
 
 import {useSpeechSynthesis} from 'react-speech-kit'
 
-tf.backend('webgl')
-
-
-
-
-
 
 export default function()  {
   var width = window.innerWidth
