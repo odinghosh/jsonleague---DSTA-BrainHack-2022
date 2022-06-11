@@ -4,21 +4,6 @@ html {
   overflow-x: visible;
 }
 
-body {
-  /* background-color: #f0efff; */
-}
-/* 
-.exercise-img {
-  background-image: url(ippt-img.jpg);
-  background-size: contain;
-  position: sticky;
-  position: -webkit-sticky;
-
-  padding-left: 0;
-  width: 700px;
-  height: 440px;
-} */
-
 .exercise-img {
   background-size: contain;
   width: 100%;
@@ -39,22 +24,29 @@ body {
   background-color: #f0efff;
   top: 500px;
 
+  padding-bottom: 5rem;
   margin-top: -12px;
 }
 
 .exercise-container {
   padding: 0 6.1rem;
-  padding-bottom: 7rem;
+  padding-bottom: 3rem;
 }
 
 .exercise-heading {
-  padding-top: 6.1rem;
-}
-
-.exercise-greeting {
+  padding-top: 4rem;
   letter-spacing: -1.8px;
-
   align-self: center;
+
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+
+  background-color: #f0efff;
+
+  z-index: 1000;
+
+  box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.03);
 }
 
 .exercise--header {
@@ -99,12 +91,18 @@ body {
 }
 
 /* exercise list style*/
+
+/* .moving-thing-2 {
+  top: 0;
+} */
+
 .exercise-body-menu {
   padding: 0 6.1rem;
 }
 
 .exercise-body-header {
   font-size: 4rem;
+  padding-top: 6.5rem;
   padding-bottom: 4rem;
 }
 
@@ -136,7 +134,7 @@ body {
 }
 
 .exercise-body--item:last-child {
-  margin-right: 0;
+  margin-bottom: 0;
 }
 
 .exercise-body--icon {
