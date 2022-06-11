@@ -1,5 +1,7 @@
 import React from 'react'
 import '../styles/HomeStyle.css'
+import '../styles/general.css'
+import '../styles/queries.css'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -33,7 +35,10 @@ export default function (){
     <div className="home-scroll-menu scrollmenu no-scrollbar container">
    
 
-      <a className="home-scroll--item" href="#">
+      <a onClick={(e)=>{
+        e.preventDefault()
+        navigate('../ippt')
+      }} className="home-scroll--item" href="#">
         <div className="flex-please">
           <ion-icon
             name="infinite-outline"
@@ -46,8 +51,10 @@ export default function (){
         </div>
       </a>
 
-      <a onClick={() => {
-        navigate('/pushup', {replace:true})
+      <a onClick={(e) => {
+          e.preventDefault()
+          navigate('../pushup')
+  
       }} className="home-scroll--item" href="#">
         <div className="flex-please">
           <ion-icon name="barbell-outline" className="home-scroll--icon"></ion-icon>
@@ -60,7 +67,10 @@ export default function (){
         </div>
       </a>
 
-      <a className="home-scroll--item" href="#">
+      <a onClick={(e)=>{
+        e.preventDefault()
+        navigate('../situp')
+      }} className="home-scroll--item" href="#">
         <div className="flex-please">
           <ion-icon name="fitness-outline" className="home-scroll--icon"></ion-icon>
           <div>
@@ -70,7 +80,10 @@ export default function (){
         </div>
       </a>
 
-      <a className="home-scroll--item" href="#">
+      <a onClick={(e)=>{
+        e.preventDefault()
+        navigate('../running')
+      }} className="home-scroll--item" href="#">
         <div className="flex-please">
           <ion-icon
             name="footsteps-outline"
@@ -91,7 +104,10 @@ export default function (){
 
 
       <a className="home-scroll--item" href="#">
-        <div className="flex-please">
+        <div onClick={(e)=>{
+          e.preventDefault()
+          navigate('../pushupPosture')
+        }} className="flex-please">
           <ion-icon name="barbell-outline" className="home-scroll--icon"></ion-icon>
           <div>
             <p className="home-scroll--heading">Push Ups</p>
