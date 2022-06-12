@@ -10,8 +10,10 @@ import {useSpeechSynthesis} from 'react-speech-kit'
 
 
 export default function()  {
-  var width = window.innerWidth
-  var height = window.innerHeight - 200
+  const [width, setWidth] = useState(window.innerWidth)
+  const [height, setHeight] = useState(window.innerHeight)
+
+  const [windowSize, setWindowSize] = useState({width: window.innerWidth, height: window.innerHeight})
 
   const [situp, setsitup] = useState(false)
 
@@ -21,6 +23,10 @@ export default function()  {
 const canvasRef = useRef(null)
 const [statusText, setstatusText] = useState('Feet not on ground')
 const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING}
+
+function handleResize(){
+  setWindowSize({width: window.innerWidth, height: window.innerHeight})
+}
 
 useEffect(()=> {
     console.log(prevStatus)
@@ -82,7 +88,24 @@ useEffect(()=> {
         
     }
 
-    useEffect(()=>{  runPosenet();console.log('run')}, [])
+    useEffect(()=>{
+      window.addEventListener("resize", handleResize);  
+      
+      runPosenet()
+
+      //window.addEventListener('resize', ()=>{
+        //setWidth(window.innerWidth)
+        //setHeight(window.innerHeight)
+          
+      //})
+      //window.addEventListener('orientationChange', ()=>{
+        //setWidth(window.innerWidth)
+        //setHeight(window.innerHeight)
+     
+      //}
+      //)
+    
+    }, [])
 
 
 
@@ -125,7 +148,7 @@ useEffect(()=> {
           
             var p13 = pose[0].keypoints[13]
 
-            if(p7.score > 0.2 && p13.score > 0.2){
+            if(p7.score > 0.5 && p13.score > 0.5){
             drawKeypoint(p7, ctx)
             drawKeypoint(p13, ctx)
             if (((p7.x - p13.x)/videoWidth) < 0.15){
@@ -195,23 +218,41 @@ useEffect(()=> {
 
     }
 
-    return <div><h1 style={{fontSize: 100, textAlign:'center'}}>
-   {statusText}
-</h1> <Webcam style={{position:'absolute',
- marginLeft:'auto', 
- marginRight:'auto', 
- left:'0', 
- right:'0', 
- textAlign:'center', 
- }} ref={webCamRef} />
+    return <div style={{height:windowSize.height}} className={prevStatus? 'correct':'wrong'} >
+    <div class="posture-heading container">
+      <a href="#">
+        <ion-icon class="utility-icon" name="chevron-back-outline"></ion-icon>
+      </a>
+      <div class="posture-greeting">
+        <p class="posture--header">Situp posture check</p>
+      </div>
+    </div>
+
+      <Webcam
+        
+        style={{width: windowSize.width, height: windowSize.height,
+        position:'absolute',
+          marginLeft:'auto', 
+          marginRight:'auto', 
+          left:'0', 
+          right:'0',}}
+        videoConstraints = {{facingMode:'user', aspectRatio: windowSize.width/windowSize.height }}
+       ref={webCamRef} />
  
- <canvas ref={canvasRef}
- style={{position:'absolute',
- marginLeft:'auto', 
- marginRight:'auto', 
- left:'0', 
- right:'0', 
- textAlign:'center', 
- }}
- />
- </div>}
+      <canvas ref={canvasRef}
+
+      
+        style={{
+          position:'absolute',
+          marginLeft:'auto', 
+          marginRight:'auto', 
+          left:'0', 
+          right:'0',
+          width:windowSize.width,
+          height: windowSize.height ,  
+          //textAlign:'center',
+      }}
+      /> 
+ </div>
+
+    }

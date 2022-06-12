@@ -15,6 +15,8 @@ import {useSpeechSynthesis} from 'react-speech-kit'
 export default function()  {
   const [width, setWidth] = useState(window.innerWidth)
   const [height, setHeight] = useState(window.innerHeight)
+
+  const [windowSize, setWindowSize] = useState({width: window.innerWidth, height: window.innerHeight})
  
 
   const [prevStatus, setPrevStatus] = useState(false)
@@ -23,6 +25,10 @@ export default function()  {
 const canvasRef = useRef(null)
 const [statusText, setstatusText] = useState('Not Straight')
 const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING}
+
+function handleResize(){
+  setWindowSize({width: window.innerWidth, height: window.innerHeight})
+}
 
 
   useEffect(()=> {
@@ -68,20 +74,26 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
         
     }
 
-    useEffect(()=>{  runPosenet();
+    useEffect(()=>{  
+      
+      window.addEventListener("resize", handleResize);  
+      
+      runPosenet()
+      
+      // runPosenet();
       //window.addEventListener('resize', ()=>{setWidth(window.innerWidth);
       //setHeight(window.innerHeight)})
 
-      window.addEventListener('resize', ()=>{
-        setWidth(window.innerWidth)
-        setHeight(window.innerHeight)  
-      })
-      window.addEventListener('orientationChange', ()=>{
-        setWidth(window.innerWidth)
-        setHeight(window.innerHeight)
+      // window.addEventListener('resize', ()=>{
+        // setWidth(window.innerWidth)
+      //   setHeight(window.innerHeight)  
+      // })
+      // window.addEventListener('orientationChange', ()=>{
+      //   setWidth(window.innerWidth)
+      //   setHeight(window.innerHeight)
      
-      }
-      )  
+      // }
+      // )  
     
     }, [])
 
@@ -159,40 +171,41 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
 
     }
 
-    return <div style={{height:height}} className={prevStatus? 'correct':'wrong'} >
+    return <div style={{height:windowSize.height}} className={prevStatus? 'correct':'wrong'} >
     <div class="posture-heading container">
       <a href="#">
         <ion-icon class="utility-icon" name="chevron-back-outline"></ion-icon>
       </a>
       <div class="posture-greeting">
-        <p class="posture--header">Push Up posture check</p>
+        <p class="posture--header">Pushup posture check</p>
       </div>
     </div>
 
-      <Webcam  style={{
+      <Webcam
+        
+        style={{width: windowSize.width, height: windowSize.height,
         position:'absolute',
-        marginLeft:'auto', 
-        marginRight:'auto', 
-        left:'0', 
-        right:'0', 
-    
-        textAlign:'center',
-        width:width,
-        height: height  - 100  
-        }} ref={webCamRef} />
+          marginLeft:'auto', 
+          marginRight:'auto', 
+          left:'0', 
+          right:'0',}}
+        videoConstraints = {{facingMode:'user', aspectRatio: windowSize.width/windowSize.height }}
+       ref={webCamRef} />
  
       <canvas ref={canvasRef}
+
+      
         style={{
           position:'absolute',
           marginLeft:'auto', 
           marginRight:'auto', 
           left:'0', 
           right:'0',
-          width:width,
-          height: height - 100 ,  
-          textAlign:'center',
+          width:windowSize.width,
+          height: windowSize.height ,  
+          //textAlign:'center',
       }}
- /> 
+      /> 
  </div>   
 
 }
