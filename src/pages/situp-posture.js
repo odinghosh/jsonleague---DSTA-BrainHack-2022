@@ -13,29 +13,45 @@ export default function()  {
   var width = window.innerWidth
   var height = window.innerHeight - 200
 
+  const [situp, setsitup] = useState(false)
+
   const [prevStatus, setPrevStatus] = useState(false)
   const {speak, speaking, cancel} = useSpeechSynthesis()
     const webCamRef = useRef(null)
 const canvasRef = useRef(null)
-const [statusText, setstatusText] = useState('Not Straight')
+const [statusText, setstatusText] = useState('Feet not on ground')
 const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING}
 
-
-  useEffect(()=> {
+useEffect(()=> {
     console.log(prevStatus)
     if(!prevStatus){
       cancel()
-      speak({text:'fix posture'})
-      setstatusText('Not Straight')
+      speak({text:'Feet not on ground'})
+      setstatusText('Feet not on ground')
     
     
 
     } else {
       cancel()
       speak({text: 'continue'})
-      setstatusText('Straight')
+      setstatusText('Feet on ground')
     }
   }, [prevStatus])
+
+  useEffect(()=> {
+    console.log(prevStatus)
+    if(situp){
+     
+      speak({text:'situp complete'})
+    
+
+    } else {
+     
+    }
+  }, [situp])
+
+
+  
 
   function drawKeypoint(keypoint, ctx) {
     // If score is null, just show the keypoint.
@@ -100,39 +116,69 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
             //console.log(pose)
            
             // console.log(ctx)
-            var LS = pose[0].keypoints[5]
-            var LH = pose[0].keypoints[11]
-            var LK = pose[0].keypoints[13]
-            
 
+            var p11 = pose[0].keypoints[11]
+          
+            var p15 = pose[0].keypoints[15]
+
+            var p7 = pose[0].keypoints[7]
+          
+            var p13 = pose[0].keypoints[13]
+
+            if(p7.score > 0.2 && p13.score > 0.2){
+            drawKeypoint(p7, ctx)
+            drawKeypoint(p13, ctx)
+            if (((p7.x - p13.x)/videoWidth) < 0.15){
+                setsitup(true)
+            } else {
+                setsitup(false)
+            }
+            }
+            
+        
+
+            if(p11.score > 0.2 && p15.score > 0.2){
+                drawKeypoint(p11, ctx)
+                drawKeypoint(p15, ctx)
+               
+
+            if((p15.y/videoHeight - p11.y/videoHeight) < -0.04){
+                setPrevStatus(false)
+              
+            } else {
+                setPrevStatus(true)
+                
+            }
+        }
            
 
-          
+
+           
+         
+
+           //if(LS.score > 0.2 && LH.score > 0.2 && LK.score > 0.2){
+            //drawKeypoint(LS,ctx)
+            //drawKeypoint(LH, ctx)
+            //drawKeypoint(LK, ctx)
+              //var radians = Math.atan2(LK.y - LH.y, LK.x - LH.x) - Math.atan2(LS.y - LH.y, LS.x - LH.x)
+            //var angle = (Math.abs(radians*(180.0/Math.PI)))
             
-
-           if(LS.score > 0.2 && LH.score > 0.2 && LK.score > 0.2){
-            drawKeypoint(LS,ctx)
-            drawKeypoint(LH, ctx)
-            drawKeypoint(LK, ctx)
-              var radians = Math.atan2(LK.y - LH.y, LK.x - LH.x) - Math.atan2(LS.y - LH.y, LS.x - LH.x)
-            var angle = (Math.abs(radians*(180.0/Math.PI)))
-          
           
 
-            if(angle > 172 && angle < 190){
+            //if(angle > 172 && angle < 190){
               
-               if(!prevStatus){
-                setPrevStatus(true)
-               }
+              // if(!prevStatus){
+                //setPrevStatus(true)
+               //}
                 
 
-            } else {
-              if(prevStatus){
-                 setPrevStatus(false)
-              }
+            //} else {
+              //if(prevStatus){
+                // setPrevStatus(false)
+              //}
                             
-            }
-          }
+          //  }
+          //}
 
     
           //}
