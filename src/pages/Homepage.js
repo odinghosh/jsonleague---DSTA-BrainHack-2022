@@ -116,7 +116,10 @@ export default function (){
         </div>
       </a>
 
-      <a className="home-scroll--item" href="#">
+      <a onClick={(e)=> {
+        e.preventDefault()
+        navigate('../situpPosture')
+      }} className="home-scroll--item" href='#'>
         <div className="flex-please">
           <ion-icon name="fitness-outline" className="home-scroll--icon"></ion-icon>
           <div>

@@ -6,12 +6,16 @@ import * as tf from  '@tensorflow/tfjs-core'
 import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-backend-wasm'
 
+import '../styles/pushupPosture.css'
+import '../styles/general.css'
+
 import {useSpeechSynthesis} from 'react-speech-kit'
 
 
 export default function()  {
-  var width = window.innerWidth
-  var height = window.innerHeight - 200
+  const [width, setWidth] = useState(window.innerWidth)
+  const [height, setHeight] = useState(window.innerHeight)
+ 
 
   const [prevStatus, setPrevStatus] = useState(false)
   const {speak, speaking, cancel} = useSpeechSynthesis()
@@ -26,14 +30,12 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
     if(!prevStatus){
       cancel()
       speak({text:'fix posture'})
-      setstatusText('Not Straight')
-    
     
 
     } else {
       cancel()
       speak({text: 'continue'})
-      setstatusText('Straight')
+      
     }
   }, [prevStatus])
 
@@ -66,7 +68,22 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
         
     }
 
-    useEffect(()=>{  runPosenet()})
+    useEffect(()=>{  runPosenet();
+      //window.addEventListener('resize', ()=>{setWidth(window.innerWidth);
+      //setHeight(window.innerHeight)})
+
+      window.addEventListener('resize', ()=>{
+        setWidth(window.innerWidth)
+        setHeight(window.innerHeight)  
+      })
+      window.addEventListener('orientationChange', ()=>{
+        setWidth(window.innerWidth)
+        setHeight(window.innerHeight)
+     
+      }
+      )  
+    
+    }, [])
 
 
 
@@ -103,35 +120,30 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
             var LS = pose[0].keypoints[5]
             var LH = pose[0].keypoints[11]
             var LK = pose[0].keypoints[13]
-            
+        
+                
 
-           
-
-          
-            
-
-           if(LS.score > 0.2 && LH.score > 0.2 && LK.score > 0.2){
+           if(LS.score > 0.3 && LH.score > 0.3 && LK.score > 0.3){
+              var radians = Math.atan2(LK.y - LH.y, LK.x - LH.x) - Math.atan2(LS.y - LH.y, LS.x - LH.x)
+            var angle = (Math.abs(radians*(180.0/Math.PI)))
             drawKeypoint(LS,ctx)
             drawKeypoint(LH, ctx)
             drawKeypoint(LK, ctx)
-              var radians = Math.atan2(LK.y - LH.y, LK.x - LH.x) - Math.atan2(LS.y - LH.y, LS.x - LH.x)
-            var angle = (Math.abs(radians*(180.0/Math.PI)))
           
           
 
-            if(angle > 172 && angle < 190){
-              
-               if(!prevStatus){
-                setPrevStatus(true)
-               }
+            if(angle > 170 && angle < 190){
+              setstatusText('Straight back')
+              setPrevStatus(true)
                 
 
             } else {
-              if(prevStatus){
-                 setPrevStatus(false)
-              }
+              setstatusText('Not Straight')
+              setPrevStatus(false)
                             
             }
+          } else {
+            
           }
 
     
@@ -147,23 +159,42 @@ const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LI
 
     }
 
-    return <div><h1 style={{fontSize: 100, textAlign:'center'}}>
-   {statusText}
-</h1> <Webcam style={{position:'absolute',
- marginLeft:'auto', 
- marginRight:'auto', 
- left:'0', 
- right:'0', 
- textAlign:'center', 
- }} ref={webCamRef} />
+    return <div style={{height:height}} className={prevStatus? 'correct':'wrong'} >
+    <div class="posture-heading container">
+      <a href="#">
+        <ion-icon class="utility-icon" name="chevron-back-outline"></ion-icon>
+      </a>
+      <div class="posture-greeting">
+        <p class="posture--header">Push Up posture check</p>
+      </div>
+    </div>
+
+      <Webcam  style={{
+        position:'absolute',
+        marginLeft:'auto', 
+        marginRight:'auto', 
+        left:'0', 
+        right:'0', 
+    
+        textAlign:'center',
+        width:width,
+        height: height  - 100  
+        }} ref={webCamRef} />
  
- <canvas ref={canvasRef}
- style={{position:'absolute',
- marginLeft:'auto', 
- marginRight:'auto', 
- left:'0', 
- right:'0', 
- textAlign:'center', 
- }}
- />
- </div>}
+      <canvas ref={canvasRef}
+        style={{
+          position:'absolute',
+          marginLeft:'auto', 
+          marginRight:'auto', 
+          left:'0', 
+          right:'0',
+          width:width,
+          height: height - 100 ,  
+          textAlign:'center',
+      }}
+ /> 
+ </div>   
+
+}
+  
+

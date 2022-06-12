@@ -27,14 +27,14 @@ useEffect(()=> {
     if(!prevStatus){
       cancel()
       speak({text:'Feet not on ground'})
-      setstatusText('Feet not on ground')
+      
     
     
 
     } else {
       cancel()
       speak({text: 'continue'})
-      setstatusText('Feet on ground')
+
     }
   }, [prevStatus])
 
@@ -82,7 +82,7 @@ useEffect(()=> {
         
     }
 
-    useEffect(()=>{  runPosenet()})
+    useEffect(()=>{  runPosenet();console.log('run')}, [])
 
 
 
@@ -142,10 +142,12 @@ useEffect(()=> {
                 drawKeypoint(p15, ctx)
                
 
-            if((p15.y/videoHeight - p11.y/videoHeight) < -0.04){
+            if((p15.y/videoHeight - p11.y/videoHeight) < -0.04 || (p15.y/videoHeight - p11.y/videoHeight) > 0.06){
+                setstatusText('Feet not on ground')
                 setPrevStatus(false)
               
             } else {
+                setstatusText('Feet on ground')
                 setPrevStatus(true)
                 
             }
