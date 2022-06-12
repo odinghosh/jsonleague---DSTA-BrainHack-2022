@@ -10,10 +10,11 @@ import {useSpeechSynthesis} from 'react-speech-kit'
 
 
 export default function()  {
-  const [width, setWidth] = useState(window.innerWidth)
-  const [height, setHeight] = useState(window.innerHeight)
+  
 
   const [windowSize, setWindowSize] = useState({width: window.innerWidth, height: window.innerHeight})
+  const [detected, setDetected] = useState(false)
+  
 
   const [situp, setsitup] = useState(false)
 
@@ -21,11 +22,13 @@ export default function()  {
   const {speak, speaking, cancel} = useSpeechSynthesis()
     const webCamRef = useRef(null)
 const canvasRef = useRef(null)
-const [statusText, setstatusText] = useState('Feet not on ground')
+const [statusText, setstatusText] = useState('Make sure knees, feet and hip in view')
 const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING}
 
 function handleResize(){
+
   setWindowSize({width: window.innerWidth, height: window.innerHeight})
+ 
 }
 
 useEffect(()=> {
@@ -89,8 +92,9 @@ useEffect(()=> {
     }
 
     useEffect(()=>{
-      window.addEventListener("resize", handleResize);  
-      
+      window.addEventListener("resize", handleResize);
+      handleResize()
+     
       runPosenet()
 
       //window.addEventListener('resize', ()=>{
@@ -161,19 +165,23 @@ useEffect(()=> {
         
 
             if(p11.score > 0.2 && p15.score > 0.2){
+                setDetected(true)
                 drawKeypoint(p11, ctx)
                 drawKeypoint(p15, ctx)
                
 
             if((p15.y/videoHeight - p11.y/videoHeight) < -0.04 || (p15.y/videoHeight - p11.y/videoHeight) > 0.06){
-                setstatusText('Feet not on ground')
+                setstatusText('bad posture')
                 setPrevStatus(false)
               
             } else {
-                setstatusText('Feet on ground')
+                setstatusText('good posture')
                 setPrevStatus(true)
                 
             }
+        } else {
+          setDetected(false)
+          setstatusText('Make sure knees, feet and hip in view')
         }
            
 
@@ -218,25 +226,31 @@ useEffect(()=> {
 
     }
 
-    return <div style={{height:windowSize.height}} className={prevStatus? 'correct':'wrong'} >
+    return <div style={{height:windowSize.height, width:windowSize.width}} className={!detected? 'starting' : prevStatus? 'correct':'wrong'} >
     <div class="posture-heading container">
       <a href="#">
         <ion-icon class="utility-icon" name="chevron-back-outline"></ion-icon>
       </a>
       <div class="posture-greeting">
-        <p class="posture--header">Situp posture check</p>
+        <p class="posture--header">{statusText}</p>
       </div>
     </div>
 
       <Webcam
         
-        style={{width: windowSize.width, height: windowSize.height,
+        style={{
         position:'absolute',
-          marginLeft:'auto', 
-          marginRight:'auto', 
+        paddingLeft :windowSize.width/20,
+        paddingRight :windowSize.width/20,
+        paddingBottom: windowSize.height/10,
+
+
+         
+          width:windowSize.width,
+          height: windowSize.height,
           left:'0', 
           right:'0',}}
-        videoConstraints = {{facingMode:'user', aspectRatio: windowSize.width/windowSize.height }}
+        videoConstraints = {{facingMode:'user', aspectRatio:16/10}}
        ref={webCamRef} />
  
       <canvas ref={canvasRef}
@@ -244,12 +258,16 @@ useEffect(()=> {
       
         style={{
           position:'absolute',
-          marginLeft:'auto', 
-          marginRight:'auto', 
+          paddingLeft :windowSize.width/20,
+        paddingRight :windowSize.width/20,
+        paddingBottom: windowSize.height/10,
+        width:windowSize.width,
+        height: windowSize.height,
+   
+          
           left:'0', 
           right:'0',
-          width:windowSize.width,
-          height: windowSize.height ,  
+       
           //textAlign:'center',
       }}
       /> 

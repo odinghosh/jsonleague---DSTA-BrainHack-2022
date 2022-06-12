@@ -4,7 +4,9 @@ html {
 
 
 
-
+.starting {
+  background-color: #ffffff;
+}
 
 .correct {
   background-color: #51cf66;

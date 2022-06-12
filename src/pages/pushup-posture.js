@@ -13,8 +13,9 @@ import {useSpeechSynthesis} from 'react-speech-kit'
 
 
 export default function()  {
-  const [width, setWidth] = useState(window.innerWidth)
-  const [height, setHeight] = useState(window.innerHeight)
+
+  const[detected, setDetected] = useState(false)
+ 
 
   const [windowSize, setWindowSize] = useState({width: window.innerWidth, height: window.innerHeight})
  
@@ -23,11 +24,14 @@ export default function()  {
   const {speak, speaking, cancel} = useSpeechSynthesis()
     const webCamRef = useRef(null)
 const canvasRef = useRef(null)
-const [statusText, setstatusText] = useState('Not Straight')
+const [statusText, setstatusText] = useState('Make sure shoulder, feet, and ankle in view')
 const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING}
 
 function handleResize(){
-  setWindowSize({width: window.innerWidth, height: window.innerHeight})
+ 
+  
+  setWindowSize({width: window.innerWidth, height: window.innerHeight}) 
+  
 }
 
 
@@ -76,9 +80,13 @@ function handleResize(){
 
     useEffect(()=>{  
       
-      window.addEventListener("resize", handleResize);  
-      
+      window.addEventListener("resize", handleResize); 
+      handleResize();
       runPosenet()
+
+     
+
+      return () => window.removeEventListener('resize', handleResize)
       
       // runPosenet();
       //window.addEventListener('resize', ()=>{setWidth(window.innerWidth);
@@ -136,6 +144,7 @@ function handleResize(){
                 
 
            if(LS.score > 0.3 && LH.score > 0.3 && LK.score > 0.3){
+            setDetected(true)
               var radians = Math.atan2(LK.y - LH.y, LK.x - LH.x) - Math.atan2(LS.y - LH.y, LS.x - LH.x)
             var angle = (Math.abs(radians*(180.0/Math.PI)))
             drawKeypoint(LS,ctx)
@@ -145,16 +154,18 @@ function handleResize(){
           
 
             if(angle > 170 && angle < 190){
-              setstatusText('Straight back')
+              setstatusText('Good Posture')
               setPrevStatus(true)
                 
 
             } else {
-              setstatusText('Not Straight')
+              setstatusText('Bad Posture')
               setPrevStatus(false)
                             
             }
           } else {
+            setDetected(false)
+            setstatusText('Make sure shoulder, feet, and ankle in view')
             
           }
 
@@ -171,25 +182,31 @@ function handleResize(){
 
     }
 
-    return <div style={{height:windowSize.height}} className={prevStatus? 'correct':'wrong'} >
+    return <div style={{height:windowSize.height, width:windowSize.width}} className={!detected? 'starting' : prevStatus? 'correct':'wrong'} >
     <div class="posture-heading container">
       <a href="#">
         <ion-icon class="utility-icon" name="chevron-back-outline"></ion-icon>
       </a>
       <div class="posture-greeting">
-        <p class="posture--header">Pushup posture check</p>
+        <p class="posture--header">{statusText}</p>
       </div>
     </div>
 
       <Webcam
         
-        style={{width: windowSize.width, height: windowSize.height,
+        style={{
         position:'absolute',
-          marginLeft:'auto', 
-          marginRight:'auto', 
+        paddingLeft :windowSize.width/20,
+        paddingRight :windowSize.width/20,
+        paddingBottom: windowSize.height/10,
+
+
+         
+          width:windowSize.width,
+          height: windowSize.height,
           left:'0', 
           right:'0',}}
-        videoConstraints = {{facingMode:'user', aspectRatio: windowSize.width/windowSize.height }}
+        videoConstraints = {{facingMode:'user', aspectRatio:16/10}}
        ref={webCamRef} />
  
       <canvas ref={canvasRef}
@@ -197,12 +214,16 @@ function handleResize(){
       
         style={{
           position:'absolute',
-          marginLeft:'auto', 
-          marginRight:'auto', 
+          paddingLeft :windowSize.width/20,
+        paddingRight :windowSize.width/20,
+        paddingBottom: windowSize.height/10,
+        width:windowSize.width,
+        height: windowSize.height,
+   
+          
           left:'0', 
           right:'0',
-          width:windowSize.width,
-          height: windowSize.height ,  
+       
           //textAlign:'center',
       }}
       /> 
