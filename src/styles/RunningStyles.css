@@ -4,6 +4,23 @@ html {
   overflow-x: visible;
 }
 
+.utility-icon {
+  width: 5rem;
+  height: 5rem;
+  color: #6c63ff;
+
+  padding: 0.7rem;
+  border-radius: 50%;
+
+  margin-bottom: 2rem;
+  background-color: white;
+}
+
+.exercise-heading div {
+  display: flex;
+  justify-content: space-between;
+}
+
 .exercise-img {
   background-size: contain;
   width: 100%;
@@ -26,6 +43,8 @@ html {
 
   padding-bottom: 5rem;
   margin-top: -12px;
+
+  /* position: absolute; */
 }
 
 .exercise-container {
@@ -54,6 +73,7 @@ html {
   font-weight: 600;
   letter-spacing: -1.8px;
   padding-bottom: 2rem;
+  /* color: #9a1b32; */
 }
 
 .exercise--description {
@@ -126,11 +146,8 @@ html {
 
   border-radius: 3rem;
   width: 100%;
+  transition: all 0.3s;
   /* display: flex; */
-}
-
-.exercise-body--item:active,
-.exercise-body--item:hover {
 }
 
 .exercise-body--item:last-child {
@@ -169,4 +186,42 @@ html {
 
 .exercise-body--subtext {
   font-size: 3rem;
+}
+
+.exercise-completed-btn:link,
+.exercise-completed-btn:visited {
+  display: inline-block;
+  color: black;
+  /* margin-right: 1.5rem; */
+
+  font-size: 3rem;
+  text-decoration: none;
+
+  background-color: #c42e4a;
+  padding: 3rem 4rem;
+  margin-top: 5rem;
+
+  border-radius: 2000px;
+  width: 100%;
+  transition: all 0.3s;
+  /* display: flex; */
+}
+
+.exercise-completed-btn:focus {
+  box-shadow: 0 0 0 0.8rem rgba(252, 102, 130, 0.4) !important;
+}
+
+.done-btn {
+  color: #c42e4a;
+}
+
+.exercise-done {
+  color: white !important;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: 800;
+  letter-spacing: 0.2rem !important;
+
+  padding-bottom: 0 !important;
 }

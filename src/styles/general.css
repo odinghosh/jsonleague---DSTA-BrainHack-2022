@@ -43,5 +43,10 @@ body {
 }
 
 .container {
-  padding: 0 6.1rem 7rem 6.1rem;
+  padding: 0 6.1rem 5rem 6.1rem;
+}
+
+*:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 0.8rem rgba(211, 208, 255, 1) !important;
 }

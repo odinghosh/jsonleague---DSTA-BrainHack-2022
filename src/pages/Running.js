@@ -1,22 +1,31 @@
-import React from 'react'
-import '../styles/RunningStyles.css'
-import '../styles/general.css'
-import '../styles/queries.css'
+import React from 'react';
+import '../styles/RunningStyles.css';
+import '../styles/general.css';
+import '../styles/queries.css';
 
-export default function(){
-    return <div>
-    
-    <div class="exercise-img"></div>
+export default function () {
+  return (
     <div class="parent-div">
       <img
         class="exercise-img"
-        src="push-up-img.jpg"
+        src="running-img.jpg"
         alt="girl doing push up"
       />
 
       <div class="moving-thing">
         <div class="exercise-heading exercise-container">
-          <p class="exercise--header">Sit Up Training</p>
+          <div>
+            <ion-icon
+              class="utility-icon"
+              name="chevron-back-outline"
+            ></ion-icon>
+
+            <ion-icon
+              class="utility-icon"
+              name="ellipsis-vertical-outline"
+            ></ion-icon>
+          </div>
+          <p class="exercise--header">Running Training</p>
 
           <div class="exercise--description">
             <p class="exercise--subtext time">
@@ -32,16 +41,12 @@ export default function(){
           </div>
         </div>
 
-       
-
         <h1 class="exercise-body-header exercise-container">
           Warm-Up <span>(4)</span>
         </h1>
 
         <div class="exercise-body-menu">
-        
-
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="javascript:void(0)">
             <div class="flex-down-please">
               <ion-icon
                 name="accessibility-outline"
@@ -54,7 +59,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="javascript:void(0)">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -67,7 +72,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="javascript:void(0)">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -80,7 +85,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="javascript:void(0)">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -94,14 +99,12 @@ export default function(){
           </a>
         </div>
 
-
         <h1 class="exercise-body-header exercise-container">
           Exercises <span>(6)</span>
         </h1>
 
         <div class="exercise-body-menu">
-       
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="javascript:void(0)">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -114,7 +117,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="javascript:void(0)">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -127,7 +130,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="javascript:void(0)">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -140,7 +143,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="javascript:void(0)">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -153,7 +156,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="javascript:void(0)">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -166,7 +169,7 @@ export default function(){
             </div>
           </a>
 
-          <a class="exercise-body--item" href="#">
+          <a class="exercise-body--item" href="javascript:void(0)">
             <div class="flex-down-please">
               <ion-icon
                 name="barbell-outline"
@@ -178,8 +181,11 @@ export default function(){
               </div>
             </div>
           </a>
+          <a class="exercise-completed-btn" href="#">
+            <p class="exercise-body--heading exercise-done">Finish</p>
+          </a>
         </div>
       </div>
     </div>
-  </div>
+  );
 }

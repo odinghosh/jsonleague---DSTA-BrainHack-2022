@@ -52,7 +52,7 @@ body {
 
 .number-icon {
   font-size: 18rem;
-  color: #fc6681;
+  color: #c42e4a;
   position: absolute;
   /* top: 7.7%;
   right: 18%; */
@@ -86,25 +86,34 @@ div.scrollmenu {
 
 .home-scroll-header {
   font-size: 4rem;
-  padding-bottom: 4rem;
+  padding-bottom: 1.5rem;
 }
 
 .home-scroll--item:link,
 .home-scroll--item:visited {
   display: inline-block;
   color: black;
-  margin-right: 1.5rem;
+  margin: 1.5rem;
 
   text-decoration: none;
 
   background-color: white;
   padding: 3rem 4rem;
   border-radius: 3rem;
-  /* display: flex; */
+  transition: all 0.3s;
 }
 
 .home-scroll--item:active,
 .home-scroll--item:hover {
+  background-color: #6c63ff;
+  color: white;
+}
+
+.home-scroll--item:active .home-scroll--heading,
+.home-scroll--item:hover .home-scroll--heading,
+.home-scroll--item:active .home-scroll--icon,
+.home-scroll--item:hover .home-scroll--icon {
+  color: white;
 }
 
 .home-scroll--item:last-child {
