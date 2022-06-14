@@ -39,7 +39,7 @@ body {
   margin-top: -6rem;
   display: grid;
 
-  row-gap: 3.5rem;
+  row-gap: 2.8rem;
 
   transition: all 0.3sec;
 }
@@ -83,6 +83,18 @@ body {
   position: relative;
 }
 
+.wrong-entry {
+  box-shadow: inset 0 0 0 2px #ff6b6b !important;
+}
+
+.register-password-state,
+.login-password-state {
+  padding: 2rem 0 0 13rem;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #ff6b6b;
+}
+
 #email,
 #password,
 #confirm-password {
@@ -108,8 +120,9 @@ body {
   text-align: right;
   display: inline-block;
 
-  padding-right: 10%;
-  padding-bottom: 7rem;
+  padding: 1rem 10% 7rem 0;
+  /* padding-right: 10%;
+  padding-bottom: 7rem; */
 }
 
 .btn--register {
@@ -175,8 +188,4 @@ body {
 
 .login-footer--sign-up:focus {
   box-shadow: 0 0 0 0.8rem rgba(252, 102, 130, 0.4) !important;
-}
-
-.login-footer--sign-up:hover,
-.login-footer--sign-up:active {
 }
