@@ -37,7 +37,7 @@ export default function () {
         </div>
       </div>
       <div class="login-heading">
-        <p class="heading">{registered? 'Signin' : 'Create Account'}</p>
+        <p class="heading">{registered? 'Sign In' : 'Create Account'}</p>
       </div>
 
       <svg
@@ -188,6 +188,7 @@ export default function () {
         </div>
       </form>
 
+      {(!registered)?
       <p class="login-footer">
         Already have an account?&nbsp;
         <a
@@ -199,7 +200,20 @@ export default function () {
         >
           Sign In
         </a>
+      </p>:<p class="login-footer">
+        Don't have an account?&nbsp;
+        <a
+          href="#"
+          class="login-footer--sign-up"
+          onClick={() => {
+            setRegistered(!registered);
+          }}
+        >
+          Register
+        </a>
       </p>
+
+        }
     </div>
   );
 }
