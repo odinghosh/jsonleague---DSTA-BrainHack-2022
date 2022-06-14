@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/RunningStyles.css';
+import '../styles/exerciseStyles.css';
 import '../styles/general.css';
 import '../styles/queries.css';
 
@@ -14,7 +14,7 @@ export default function () {
 
       <div class="moving-thing">
         <div class="exercise-heading exercise-container">
-          <div>
+          <div class="utility-bar">
             <ion-icon
               class="utility-icon"
               name="chevron-back-outline"
@@ -36,7 +36,7 @@ export default function () {
             <p class="exercise--subtext target">
               Target <br />
               <ion-icon class="icon" name="disc-outline"></ion-icon>
-              <span> Core, Quads, Shoulders </span>
+              <span> Core, Quads, Shoulder</span>
             </p>
           </div>
         </div>
