@@ -1,10 +1,17 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import '../styles/circuitStyles.css'
 import '../styles/general.css'
 import '../styles/queries.css'
+import { createExercise, exerciseList } from '../controllers/exerciseController'
  
 
+
+
 export default function(){
+
+  useEffect( ()=> {
+    console.log(exerciseList)
+  }, [])
 
     return <div>
    
@@ -37,74 +44,11 @@ export default function(){
         </h1>
 
         <div class="exercise-body-menu">
+          {exerciseList.map((e) => {
+            return createExercise(e.exerciseName, e.exerciseAmount)
+          })}
        
-
-          <a class="exercise-body--item" href="#">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">Jumping jacks</p>
-                <p class="exercise-body--subtext">3 set of 10 reps</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">Arm Circles</p>
-                <p class="exercise-body--subtext">3 set of 10 reps</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">Shoulder Shrugs</p>
-                <p class="exercise-body--subtext">3 set of 10 reps</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="">
-            <div class="flex-down-please">
-              <ion-icon
-                name="footsteps-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">Leg swings <br />(forward)</p>
-                <p class="exercise-body--subtext">3 set of 10 reps</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="">
-            <div class="flex-down-please">
-              <ion-icon
-                name="footsteps-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">
-                  Leg swings <br />(side-to-side)
-                </p>
-                <p class="exercise-body--subtext">3 set of 10 reps</p>
-              </div>
-            </div>
-          </a>
+          
         </div>
 
        
