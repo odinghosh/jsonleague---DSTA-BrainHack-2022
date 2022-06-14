@@ -6,6 +6,8 @@ import Running from './pages/Running'
 import Situp from './pages/Situp'
 import Pushup from './pages/Pushup'
 import SitupPosture from './pages/situp-posture'
+import Initialise from "./pages/Initialise";
+import Settings from "./pages/Settings";
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
 
@@ -21,7 +23,8 @@ function App() {
       <Route path='situp' element={<Situp/>}/>
       <Route path='pushup' element={<Pushup/>}/>
       <Route path='situpPosture' element={<SitupPosture/>}/>
-      
+      <Route path='initialise' element={<Initialise/>}/>
+      <Route path='settings' element={<Settings/>}/>
 
       </Routes>
     </BrowserRouter>
