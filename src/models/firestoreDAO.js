@@ -1,4 +1,4 @@
-import {setDoc, doc, serverTimestamp, getDoc} from 'firebase/firestore'
+import {collection, setDoc, doc, serverTimestamp, getDoc, getDocs} from 'firebase/firestore'
 import {firestoreDB} from '../firebase_config'
 import firebase from 'firebase/app'
 
@@ -36,4 +36,22 @@ export async function getUserRecord(uid) {
 
 async function addNewRecord() {
 
+}
+
+//async function getExercisesByType(string type(warm up or exercise), string target, string ExerciseType(circuit or pushups or ...))
+export async function getExercisesByType(type, target, ExerciseType) {
+    try {
+        const path = "WorkoutDifficulty/" + target + "/ExerciseTypeList/" + ExerciseType + "/" + type
+        const querySnapshot = await getDocs(collection(firestoreDB, path))
+        let exercise_data = []
+        querySnapshot.forEach((doc) => {
+            var jsondata = {}
+            jsondata[doc.id] = doc.data()
+            exercise_data.push(jsondata)
+        })
+        console.log(exercise_data)
+        return exercise_data
+    } catch (e) {
+        console.error("Error getting exercise data.")
+    }
 }

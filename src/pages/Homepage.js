@@ -3,7 +3,7 @@ import '../styles/HomeStyle.css';
 import '../styles/general.css';
 import '../styles/queries.css';
 import pfp from './pfp.png';
-import {getUserRecord} from "../models/firestoreDAO";
+import {getUserRecord, getExercisesByType} from "../models/firestoreDAO";
 import Cookies from 'universal-cookie';
 
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +19,7 @@ export default function () {
     getUserRecord(uid)
         .then()
         .catch()
+
   }, [])
 
   //checking if a person is authenticated already
