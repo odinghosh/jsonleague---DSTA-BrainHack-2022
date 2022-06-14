@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import trainerImage from './personal-training-loginpage.svg';
 import Cookies from 'universal-cookie';
-import {register, login} from '../database_api'
+import * as authenticationController from '../controllers/authenticationController'
 
 import '../styles/style.css';
 import '../styles/general.css';
@@ -118,7 +118,7 @@ export default function () {
             onClick={() => {
               if (registered) {
                   console.log('Initiating logging in')
-                  login(email, password)
+                  authenticationController.login(email, password)
                       .then(user => {
                           console.log(user)
                           cookies.set('uid', user.uid, { path: '/' });
@@ -130,7 +130,7 @@ export default function () {
                       })
 
               } else {
-                  register(email, password)
+                  authenticationController.register(email, password)
                       .then((user) => {
                           console.log(user)
                           cookies.set('uid', user.uid, { path: '/' });
