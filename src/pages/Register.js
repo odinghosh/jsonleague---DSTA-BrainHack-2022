@@ -14,8 +14,11 @@ const cookies = new Cookies();
 export default function () {
   const [registered, setRegistered] = useState(true);
   const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [wrongInput, setwrongInput] = useState(false)
   const [confirm_password, check_confirm_password] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -73,8 +76,9 @@ export default function () {
           <div>
             <div class="input-password">
               <input
+                onClick={(e) => {setwrongInput(false)}}
                 id="password"
-                class="wrong-entry"
+                className={wrongInput && "wrong-entry"}
                 type="password"
                 placeholder="password"
                 name="password"
@@ -88,12 +92,8 @@ export default function () {
               ></ion-icon>
             </div>
 
-            <p class="login-password-state">
-              {confirm_password
-                ? ''
-                : password == null
-                ? String.fromCharCode(160)
-                : 'Incorrect Username and/or Password'}
+           <p class="login-password-state">
+              {wrongInput?  'Incorrect Username and/or Password':''}
             </p>
           </div>
         )}
@@ -101,13 +101,17 @@ export default function () {
         {!registered && (
           <div class="input-password">
             <input
+            onClick={(e) => {setwrongInput(false)}}
               id="password"
-              class="wrong-entry"
+              className={wrongInput && "wrong-entry"}
               type="password"
               placeholder="password"
               name="password"
               required
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {setPassword(e.target.value); 
+                if (confirmPassword === password) check_confirm_password(true)
+                else check_confirm_password(false);
+              }}
             />
 
             <ion-icon
@@ -121,13 +125,15 @@ export default function () {
           <div>
             <div class="input-confirm-password">
               <input
+              onClick={(e) => {setwrongInput(false)}}
                 id="confirm-password"
-                class="wrong-entry"
+                className={wrongInput && "wrong-entry"}
                 type="password"
                 placeholder=" confirm password"
                 name="password"
                 onChange={(e) => {
-                  if (e.target.value === password) check_confirm_password(true);
+                  setConfirmPassword(e.target.value)
+                  if (password === confirmPassword) check_confirm_password(true);
                   else check_confirm_password(false);
                 }}
                 required
@@ -138,12 +144,9 @@ export default function () {
                 class="input-img input-img--confirm-password"
               ></ion-icon>
             </div>
+            
             <p class="register-password-state">
-              {confirm_password
-                ? ''
-                : password == null
-                ? String.fromCharCode(160)
-                : 'Passwords do not match'}
+              {confirm_password? 'Passwords do not match': ''}
             </p>
           </div>
         )}
@@ -160,7 +163,7 @@ export default function () {
                           navigate('../home');
                       })
                       .catch(err => {
-                          console.log(err)
+                          setwrongInput(true)
                           //Display invalid credentials
                       })
 
@@ -174,6 +177,7 @@ export default function () {
                       .catch(err =>
                       {
                           //Display error
+                          setwrongInput(true)
                           console.log(err)
                       })
               }
