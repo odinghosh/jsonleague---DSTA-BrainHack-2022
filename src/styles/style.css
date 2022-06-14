@@ -1,13 +1,9 @@
 body {
-  background: url('./wave.svg') no-repeat bottom; 
-  height: 100vh;
-  background-size: 1150%;
-  /* height: 100%; */
+  background-color: #f0efff;
 }
 
-.waves-back {
-  z-index: -1;
-  padding-top: 18rem;
+.wave-img {
+  transform: rotate(180deg);
 }
 
 .trainer-img img {
@@ -16,43 +12,42 @@ body {
 }
 
 .trainer-img {
-  /* top: 50%;
-  left: 50%; */
   transform: translate(21%, 4rem);
 }
 
+.white-back {
+  background-color: white;
+}
+
 .login-heading {
-  padding: 7rem 9rem 3rem 9rem;
+  padding: 7rem 9rem 0rem 9rem;
+  background-color: white;
 }
 
 .heading {
   font-size: 8rem;
-  /* font-weight: 500; */
   letter-spacing: -1.8px;
-  text-decoration: underline 2px;
-  text-underline-offset: 4px;
 }
 
 .subtext {
   padding-top: 1rem;
   font-size: 4rem;
-  text-decoration: underline;
   font-weight: 800;
 }
 
 .login-form {
-  padding-top: 10rem;
+  margin-top: -6rem;
   display: grid;
 
   row-gap: 3.5rem;
-  position: relative;
+
+  transition: all 0.3sec;
 }
 
 .login-form input,
 .login-form select {
   font-size: 3.5rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
 
   width: 100%;
@@ -64,9 +59,12 @@ body {
   background-color: white;
   border-radius: 50px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+  transition: all 0.3sec;
 }
 
 .login-form input::placeholder {
+  text-transform: uppercase;
   color: #c4c1ff;
 }
 
@@ -82,6 +80,7 @@ body {
 .input-password,
 .input-confirm-password {
   text-align: center;
+  position: relative;
 }
 
 #email,
@@ -91,17 +90,17 @@ body {
 }
 
 .input-img--email {
-  top: 13rem;
+  top: 3rem;
   left: 12.4rem;
 }
 
 .input-img--password {
-  top: 28.5rem;
+  top: 3rem;
   left: 12.4rem;
 }
 
 .input-img--confirm-password {
-  top: 44rem;
+  top: 3rem;
   left: 12.4rem;
 }
 
@@ -113,19 +112,42 @@ body {
   padding-bottom: 7rem;
 }
 
+.btn--register {
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 3.5rem !important;
+  color: #fdf2e9;
+
+  background-color: #c42e4a;
+
+  position: relative;
+  padding-right: 10rem;
+  align-self: right;
+
+  width: 35rem;
+}
+
+.btn--register:focus {
+  box-shadow: 0 0 0 0.8rem rgba(252, 102, 130, 0.4) !important;
+}
+
 .btn--login {
   text-align: left;
   text-transform: uppercase;
   font-size: 3.5rem !important;
   color: #fdf2e9;
 
-  background-color: #fc6681;
+  background-color: #c42e4a;
 
   position: relative;
   padding-right: 10rem;
   align-self: right;
 
   width: 30rem;
+}
+
+.btn--login:focus {
+  box-shadow: 0 0 0 0.8rem rgba(252, 102, 130, 0.4) !important;
 }
 
 .btn--img {
@@ -147,7 +169,12 @@ body {
 .login-footer--sign-up:link,
 .login-footer--sign-up:visited {
   text-decoration: none;
-  color: #fc6681;
+  color: #c42e4a;
+  transition: all 0.3sec;
+}
+
+.login-footer--sign-up:focus {
+  box-shadow: 0 0 0 0.8rem rgba(252, 102, 130, 0.4) !important;
 }
 
 .login-footer--sign-up:hover,
