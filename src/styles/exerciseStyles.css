@@ -17,7 +17,7 @@ html {
   padding: 0.7rem;
   border-radius: 50%;
 
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   background-color: white;
 }
 
@@ -147,6 +147,7 @@ html {
   border-radius: 3rem;
   width: 100%;
   /* display: flex; */
+  transition: all 0.3s;
 }
 
 .exercise-body--item:active,
@@ -194,8 +195,6 @@ html {
 .exercise-completed-btn:link,
 .exercise-completed-btn:visited {
   display: inline-block;
-  color: black;
-  /* margin-right: 1.5rem; */
 
   font-size: 3rem;
   text-decoration: none;
@@ -206,11 +205,12 @@ html {
 
   border-radius: 2000px;
   width: 100%;
+  transition: all 0.3s;
   /* display: flex; */
 }
 
-.exercise-completed-btn:active,
-.exercise-completed-btn:hover {
+.exercise-completed-btn:focus {
+  box-shadow: 0 0 0 0.8rem #e7abb7 !important;
 }
 
 .done-btn {
