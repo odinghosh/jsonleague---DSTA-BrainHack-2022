@@ -37,7 +37,7 @@ export default function () {
         </div>
       </div>
       <div class="login-heading">
-        <p class="heading">Create Account</p>
+        <p class="heading">{registered? 'Signin' : 'Create Account'}</p>
       </div>
 
       <svg
