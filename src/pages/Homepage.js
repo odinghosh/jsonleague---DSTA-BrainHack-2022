@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/HomeStyle.css';
 import '../styles/general.css';
 import '../styles/queries.css';
 import pfp from './pfp.png';
+import {getUserRecord} from "../models/firestoreDAO";
+import Cookies from 'universal-cookie';
 
 import { useNavigate } from 'react-router-dom';
 
+const cookies = new Cookies();
+
 export default function () {
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    var uid = cookies.get('uid');
+    console.log(uid)
+    getUserRecord(uid)
+        .then()
+        .catch()
+  }, [])
+
+  //checking if a person is authenticated already
+  /*
+var uid = cookies.get('uid');
+if (uid) {
+  navigate('../home');
+}*/
+
   return (
     <div>
       <div className="home-heading container">

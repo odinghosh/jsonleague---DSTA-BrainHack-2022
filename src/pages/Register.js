@@ -160,11 +160,15 @@ export default function () {
                       .then(user => {
                           console.log(user)
                           cookies.set('uid', user.uid, { path: '/' });
+                          //console.log(cookies.get('uid'))
                           navigate('../home');
                       })
                       .catch(err => {
                           setwrongInput(true)
                           //Display invalid credentials
+=======
+                          //Display invalid credentials on UI
+>>>>>>> Stashed changes
                       })
 
               } else {
@@ -172,6 +176,7 @@ export default function () {
                       .then((user) => {
                           console.log(user)
                           cookies.set('uid', user.uid, { path: '/' });
+                          //console.log(cookies.get('uid'))
                           navigate('../home', { replace: true });
                       })
                       .catch(err =>
@@ -179,6 +184,7 @@ export default function () {
                           //Display error
                           setwrongInput(true)
                           console.log(err)
+                          //Display registration error on UI
                       })
               }
             }}

@@ -13,8 +13,6 @@ import {firebaseApp} from '../firebase_config'
 
 export async function register(email, password) {
     const auth = getAuth(firebaseApp)
-   
- 
 
     const user = await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -25,17 +23,13 @@ export async function register(email, password) {
             return user
         })
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error(errorCode);
-            console.error(errorMessage);
+            console.error(error.message);
             throw error
         });
     return user
 }
 
 export async function login(email, password) {
-   
     const auth = getAuth(firebaseApp)
 
     const user = await signInWithEmailAndPassword(auth, email, password)
@@ -45,10 +39,7 @@ export async function login(email, password) {
             return userCredential.user;
         })
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error(errorCode);
-            console.error(errorMessage);
+            console.error(error.message);
             throw error
         });
     return user
