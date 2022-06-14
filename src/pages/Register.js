@@ -30,7 +30,16 @@ export default function () {
     if (uid) {
       navigate('../home');
     }*/
-  });
+  }, []);
+
+
+  useEffect(()=> {
+    if(password === confirmPassword){
+      check_confirm_password(false)
+    } else {
+      check_confirm_password(true)
+    }
+  })
 
   return (
     <div>
@@ -107,10 +116,9 @@ export default function () {
               type="password"
               placeholder="password"
               name="password"
+              value = {password}
               required
               onChange={(e) => {setPassword(e.target.value); 
-                if (confirmPassword === password) check_confirm_password(true)
-                else check_confirm_password(false);
               }}
             />
 
@@ -131,10 +139,9 @@ export default function () {
                 type="password"
                 placeholder=" confirm password"
                 name="password"
+                value = {confirmPassword}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value)
-                  if (password === confirmPassword) check_confirm_password(true);
-                  else check_confirm_password(false);
                 }}
                 required
               />
