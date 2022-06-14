@@ -39,7 +39,7 @@ export default function () {
     } else {
       check_confirm_password(true)
     }
-  })
+  }, [password, confirmPassword])
 
   return (
     <div>
