@@ -12,7 +12,7 @@ import '../styles/queries.css';
 const cookies = new Cookies();
 
 export default function () {
-  const [registered, setRegistered] = useState(false);
+  const [registered, setRegistered] = useState(true);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirm_password, check_confirm_password] = useState(false);
@@ -65,50 +65,85 @@ export default function () {
 
           <ion-icon
             name="mail-outline"
-            class="input-img input-img--email"
+            class="input-img input-img--email "
           ></ion-icon>
         </div>
 
-        <div class="input-password">
-          <input
-            id="password"
-            type="password"
-            placeholder="password"
-            name="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        {registered && (
+          <div>
+            <div class="input-password">
+              <input
+                id="password"
+                class="wrong-entry"
+                type="password"
+                placeholder="password"
+                name="password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-          <ion-icon
-            name="key-outline"
-            class="input-img input-img--password"
-          ></ion-icon>
-        </div>
+              <ion-icon
+                name="key-outline"
+                class="input-img input-img--password"
+              ></ion-icon>
+            </div>
+
+            <p class="login-password-state">
+              {confirm_password
+                ? ''
+                : password == null
+                ? String.fromCharCode(160)
+                : 'Incorrect Username and/or Password'}
+            </p>
+          </div>
+        )}
 
         {!registered && (
-          <div class="input-confirm-password">
+          <div class="input-password">
             <input
-              id="confirm-password"
+              id="password"
+              class="wrong-entry"
               type="password"
-              placeholder=" confirm password"
+              placeholder="password"
               name="password"
-              onChange={(e) => {
-                if (e.target.value === password) check_confirm_password(true);
-                else check_confirm_password(false);
-              }}
               required
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <ion-icon
               name="key-outline"
-              class="input-img input-img--confirm-password"
+              class="input-img input-img--password"
             ></ion-icon>
-            <p>
+          </div>
+        )}
+
+        {!registered && (
+          <div>
+            <div class="input-confirm-password">
+              <input
+                id="confirm-password"
+                class="wrong-entry"
+                type="password"
+                placeholder=" confirm password"
+                name="password"
+                onChange={(e) => {
+                  if (e.target.value === password) check_confirm_password(true);
+                  else check_confirm_password(false);
+                }}
+                required
+              />
+
+              <ion-icon
+                name="key-outline"
+                class="input-img input-img--confirm-password"
+              ></ion-icon>
+            </div>
+            <p class="register-password-state">
               {confirm_password
                 ? ''
                 : password == null
-                ? ''
-                : 'Invalid Confirm Password'}
+                ? String.fromCharCode(160)
+                : 'Passwords do not match'}
             </p>
           </div>
         )}

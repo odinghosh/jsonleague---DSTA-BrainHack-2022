@@ -2,6 +2,8 @@ import React from 'react';
 import '../styles/HomeStyle.css';
 import '../styles/general.css';
 import '../styles/queries.css';
+import pfp from './pfp.png';
+
 import { useNavigate } from 'react-router-dom';
 
 export default function () {
@@ -10,17 +12,16 @@ export default function () {
     <div>
       <div className="home-heading container">
         <div className="home-greeting">
-          <p className="home--header">Hi Lorem,</p>
           <p className="home--subtext">Glad to see you again!</p>
+          <p className="home--header">Dreaded Scientist</p>
         </div>
-        <div className="days-worked-out">
-          <svg height="120" width="120" className="days-worked-out-circle">
-            <circle cx="60" cy="60" r="60" fill="#FFF0F2" />
-          </svg>
-          <div>
-            <i className="fa-solid fa-8 number-icon"></i>
-          </div>
-          <p className="days-worked-out--text">Days worked out</p>
+        <img src={pfp} class="user-profile-pfp "></img>
+      </div>
+
+      <div class="container">
+        <div class="minutes-worked-out">
+          <p class="minutes-heading">Minutes worked out</p>
+          <p class="minutes-subtext">12,532</p>
         </div>
       </div>
 
