@@ -3,7 +3,7 @@ import '../styles/HomeStyle.css';
 import '../styles/general.css';
 import '../styles/queries.css';
 import pfp from './pfp.png';
-import {getUserRecord, getExercisesByType} from "../models/firestoreDAO";
+import {getUserRecord, getExercisesByType, getAllExerciseTypes, getAllTypesForExercise} from "../models/firestoreDAO";
 import Cookies from 'universal-cookie';
 
 import { useNavigate } from 'react-router-dom';
@@ -15,10 +15,17 @@ export default function () {
 
   useEffect(()=>{
     var uid = cookies.get('uid');
+    if (!uid) {
+
+    }
     console.log(uid)
     getUserRecord(uid)
         .then()
         .catch()
+
+    //getExercisesByType("WarmUps", "Gold", "IPPTCircuit").then().catch()
+    //getAllExerciseTypes("Gold").then().catch()
+    //getAllTypesForExercise("Gold", "Legs").then().catch()
 
   }, [])
 
