@@ -158,12 +158,12 @@ export default function () {
                   console.log('Initiating logging in')
                   authenticationController.login(email, password)
                       .then(user => {
-                          console.log(user)
                           cookies.set('uid', user.uid, { path: '/' });
                           //console.log(cookies.get('uid'))
                           navigate('../home');
                       })
                       .catch(err => {
+<<<<<<< Updated upstream
                           setwrongInput(true)
                           //Display invalid credentials
 =======
@@ -174,17 +174,19 @@ export default function () {
               } else {
                   authenticationController.register(email, password)
                       .then((user) => {
-                          console.log(user)
                           cookies.set('uid', user.uid, { path: '/' });
                           //console.log(cookies.get('uid'))
                           navigate('../home', { replace: true });
                       })
                       .catch(err =>
                       {
+<<<<<<< Updated upstream
                           //Display error
                           setwrongInput(true)
                           console.log(err)
+=======
                           //Display registration error on UI
+>>>>>>> Stashed changes
                       })
               }
             }}
