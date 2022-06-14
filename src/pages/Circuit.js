@@ -3,24 +3,21 @@ import '../styles/exerciseStyles.css';
 import '../styles/general.css';
 import ipptImg from './ippt-img.jpg';
 import { useNavigate } from 'react-router-dom';
-import { createExercise, getAllExerciseByType } from '../controllers/exerciseController';
+import { createExercise, getExerciseDataUI } from '../controllers/exerciseController';
 
 export default function () {
   const navigate = useNavigate();
 
   const [warmUpExercises, setWarmUpExercises] = useState([])
   const [normalExercises, setNormalExercises] = useState([])
+  const [time, setTime] = useState('')
+  
   
   
   
   useEffect(() => {
-    getAllExerciseByType('WarmUps', 'Gold', 'PushUpTraining').then((response)=> {
-      console.log(response)
-      setWarmUpExercises(response)
-    })
-    getAllExerciseByType('Exercises', 'Gold', 'PushUpTraining').then((response)=>{
-      setNormalExercises(response)
-    })
+    getExerciseDataUI('WarmUps', 'IPPTCircuit', setWarmUpExercises);
+    getExerciseDataUI('Exercises', 'IPPTCircuit', setNormalExercises);
     
   } , [])
   return (

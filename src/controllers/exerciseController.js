@@ -2,10 +2,10 @@ import React from 'react'
 import { getExercisesByType } from '../models/firestoreDAO'
 
 
-const exerciseList = [{exerciseName: 'Jumping jacks', exerciseAmount: '3 sets of 10 reps'}]
+
 
 // creates exercise html object from a specified exercise data
-function createExercise (exerciseName, exerciseAmount) {
+export function createExercise (exerciseName, exerciseAmount) {
     return <a class="exercise-body--item" href="#">
     <div class="flex-down-please">
       <ion-icon
@@ -26,12 +26,16 @@ function createExercise (exerciseName, exerciseAmount) {
     return await getAllExerciseTypes(difficulty)
   }
 
-  export async function getAllExerciseByType(type, difficulty, ExerciseType){
-    return await getExercisesByType(type, difficulty, ExerciseType)
+
+  export function getExerciseDataUI(type,pageName, stateHook){
+    getExercisesByType(type, 'Gold', pageName).then((response)=>{
+      console.log(response)
+      stateHook(response)
+    })
   }
 
   
-  export {createExercise, exerciseList}
+
 
 
 

@@ -4,7 +4,7 @@ import '../styles/general.css';
 import sitUpImg from './sit-up-img.jpg';
 import { useNavigate } from 'react-router-dom';
 
-import { createExercise, getAllExerciseByType } from '../controllers/exerciseController';
+import { createExercise, getExerciseDataUI} from '../controllers/exerciseController';
 
 
 export default function () {
@@ -13,13 +13,10 @@ export default function () {
   const [normalExercises, setNormalExercises] = useState([])
 
   useEffect(() => {
-    getAllExerciseByType('WarmUps', 'Gold', 'SitUpTraining').then((response)=> {
-      console.log(response)
-      setWarmUpExercises(response)
-    })
-    getAllExerciseByType('Exercises', 'Gold', 'SitUpTraining').then((response)=>{
-      setNormalExercises(response)
-    })
+    
+
+    getExerciseDataUI('WarmUps', 'SitUpTraining', setWarmUpExercises);
+    getExerciseDataUI('Exercises', 'SitUpTraining', setNormalExercises);
     
   } , [])
   return (

@@ -3,7 +3,7 @@ import '../styles/exerciseStyles.css';
 import '../styles/general.css';
 import runningImg from './running-img.jpg';
 import { useNavigate } from 'react-router-dom';
-import { createExercise, getAllExerciseByType } from '../controllers/exerciseController';
+import { createExercise, getExerciseDataUI } from '../controllers/exerciseController';
 
 export default function () {
   const navigate = useNavigate();
@@ -14,13 +14,8 @@ export default function () {
   
   
   useEffect(() => {
-    getAllExerciseByType('WarmUps', 'Gold', 'RunningTraining').then((response)=> {
-      console.log(response)
-      setWarmUpExercises(response)
-    })
-    getAllExerciseByType('Exercises', 'Gold', 'RunningTraining').then((response)=>{
-      setNormalExercises(response)
-    })
+    getExerciseDataUI('WarmUps', 'RunningTraining', setWarmUpExercises);
+    getExerciseDataUI('Exercises', 'RunningTraining', setNormalExercises);
     
   } , [])
   return (

@@ -3,7 +3,7 @@ import '../styles/exerciseStyles.css';
 import '../styles/general.css';
 import pushUpImg from './push-up-img.jpg';
 import { useNavigate } from 'react-router-dom';
-import { createExercise, getAllExerciseByType } from '../controllers/exerciseController';
+import { createExercise, getExerciseDataUI } from '../controllers/exerciseController';
 
 export default function (props) {
   const [warmUpExercises, setWarmUpExercises] = useState([])
@@ -12,13 +12,8 @@ export default function (props) {
   
   
   useEffect(() => {
-    getAllExerciseByType('WarmUps', 'Gold', 'PushUpTraining').then((response)=> {
-      console.log(response)
-      setWarmUpExercises(response)
-    })
-    getAllExerciseByType('Exercises', 'Gold', 'PushUpTraining').then((response)=>{
-      setNormalExercises(response)
-    })
+    getExerciseDataUI('WarmUps', 'PushUpTraining', setWarmUpExercises);
+    getExerciseDataUI('Exercises', 'PushUpTraining', setNormalExercises);
     
   } , [])
 
