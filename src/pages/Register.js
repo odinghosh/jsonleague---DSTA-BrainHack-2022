@@ -2,36 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import trainerImage from './personal-training-loginpage.svg';
 import Cookies from 'universal-cookie';
+import {register, login} from '../database_api'
 
 import '../styles/style.css';
 import '../styles/general.css';
 import '../styles/queries.css';
 
-// Firebase SDK
-import { initializeApp } from 'firebase/app';
-//import { getAnalytics } from "firebase/analytics";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
-
 //Initialise cookies
 const cookies = new Cookies();
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyBaxnPfnVYZKGzgo07O43S3OykoMl1qS-g',
-  authDomain: 'jsonleague.firebaseapp.com',
-  projectId: 'jsonleague',
-  storageBucket: 'jsonleague.appspot.com',
-  messagingSenderId: '76946241417',
-  appId: '1:76946241417:web:45a254e79c9b80fb645358',
-  measurementId: 'G-8WX33FZ0V8',
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app)
 
 export default function () {
   const [registered, setRegistered] = useState(false);
@@ -44,10 +22,11 @@ export default function () {
   // This block of code will run only once when the page is rendered
   useEffect(() => {
     //checking if a person is authenticated already
+      /*
     var uid = cookies.get('uid');
     if (uid) {
       navigate('../home');
-    }
+    }*/
   });
 
   return (
@@ -137,39 +116,31 @@ export default function () {
         <div class="btn-login">
           <a
             onClick={() => {
-              const auth = getAuth();
               if (registered) {
-                signInWithEmailAndPassword(auth, email, password)
-                  .then((userCredential) => {
-                    // Signed in
-                    const user = userCredential.user;
-                    cookies.set('uid', user.uid, { path: '/' });
-                    console.log(user.uid);
-                    navigate('../home');
-                    // ...
-                  })
-                  .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log(errorCode);
-                    console.log(errorMessage);
-                  });
+                  console.log('Initiating logging in')
+                  login(email, password)
+                      .then(user => {
+                          console.log(user)
+                          cookies.set('uid', user.uid, { path: '/' });
+                          navigate('../home');
+                      })
+                      .catch(err => {
+                          console.log(err)
+                          //Display invalid credentials
+                      })
+
               } else {
-                createUserWithEmailAndPassword(auth, email, password)
-                  .then((userCredential) => {
-                    // Signed in
-                    const user = userCredential.user;
-                    console.log('New User ' + email + ' has registered');
-                    cookies.set('uid', user.uid, { path: '/' });
-                    navigate('../home', { replace: true });
-                    // ...
-                  })
-                  .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log(errorCode);
-                    console.log(errorMessage);
-                  });
+                  register(email, password)
+                      .then((user) => {
+                          console.log(user)
+                          cookies.set('uid', user.uid, { path: '/' });
+                          navigate('../home', { replace: true });
+                      })
+                      .catch(err =>
+                      {
+                          //Display error
+                          console.log(err)
+                      })
               }
             }}
             href="#"
