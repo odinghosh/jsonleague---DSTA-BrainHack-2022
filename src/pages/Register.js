@@ -25,11 +25,11 @@ export default function () {
   // This block of code will run only once when the page is rendered
   useEffect(() => {
     //checking if a person is authenticated already
-      /*
+      
     var uid = cookies.get('uid');
     if (uid) {
       navigate('../home');
-    }*/
+    }
   }, []);
 
 

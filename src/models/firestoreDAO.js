@@ -47,8 +47,8 @@ export async function getExercisesByType(type, difficulty, ExerciseType) {
 
         let exercise_workouts = []
         querySnapshot.forEach((doc) => {
-            var jsondata = {}
-            jsondata[doc.id] = doc.data()
+            
+            var jsondata = {...doc.data(), name:doc.id}
             exercise_workouts.push(jsondata)
         })
 
@@ -56,8 +56,8 @@ export async function getExercisesByType(type, difficulty, ExerciseType) {
         exercise_data["workouts"] = exercise_workouts
         exercise_data["time"] = docSnapshot.get("time")
         exercise_data["target"] = docSnapshot.get("target")
-        console.log(exercise_data)
-        return exercise_data
+     
+        return exercise_workouts
     } catch (e) {
         console.error("Error getting exercise data.", e.stack)
     }
@@ -74,7 +74,7 @@ export async function getAllExerciseTypes(difficulty) {
             jsondata[doc.id] = doc.data()
             exercise_data.push(jsondata)
         })
-        console.log(exercise_data)
+        //console.log(exercise_data)
         return exercise_data
 
     } catch (e) {

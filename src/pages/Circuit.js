@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/exerciseStyles.css';
 import '../styles/general.css';
 import ipptImg from './ippt-img.jpg';
 import { useNavigate } from 'react-router-dom';
+import { createExercise, getAllExerciseByType } from '../controllers/exerciseController';
 
 export default function () {
   const navigate = useNavigate();
+
+  const [warmUpExercises, setWarmUpExercises] = useState([])
+  const [normalExercises, setNormalExercises] = useState([])
+  
+  
+  
+  useEffect(() => {
+    getAllExerciseByType('WarmUps', 'Gold', 'PushUpTraining').then((response)=> {
+      console.log(response)
+      setWarmUpExercises(response)
+    })
+    getAllExerciseByType('Exercises', 'Gold', 'PushUpTraining').then((response)=>{
+      setNormalExercises(response)
+    })
+    
+  } , [])
   return (
     <div class="parent-div">
       <img class="exercise-img" src={ipptImg} alt="people warming up" />
@@ -48,91 +65,8 @@ export default function () {
         </h1>
 
         <div class="exercise-body-menu">
-          <a class="exercise-body--item" href="javascript:void(0)">
-            <div class="flex-down-please">
-              <ion-icon
-                name="accessibility-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">Jumping Jacks</p>
-                <p class="exercise-body--subtext">3 set of 10 reps</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="javascript:void(0)">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">Arm Circles</p>
-                <p class="exercise-body--subtext">3 set of 10 reps</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="javascript:void(0)">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">Shoulder Shrugs</p>
-                <p class="exercise-body--subtext">3 set of 10 reps</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="javascript:void(0)">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">Wrist Circles</p>
-                <p class="exercise-body--subtext">3 sets of 10 reps</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="javascript:void(0)">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">
-                  Leg Swings
-                  <br />
-                  (side-to-side)
-                </p>
-                <p class="exercise-body--subtext">3 sets of 10 reps</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="javascript:void(0)">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">
-                  Leg Swings
-                  <br />
-                  (forward)
-                </p>
-                <p class="exercise-body--subtext">3 sets of 10 reps</p>
-              </div>
-            </div>
-          </a>
+        {(warmUpExercises).map((e)=>{return createExercise(e.name, e.amount)})}
+          
         </div>
 
         <h1 class="exercise-body-header exercise-container">
@@ -140,44 +74,8 @@ export default function () {
         </h1>
 
         <div class="exercise-body-menu">
-          <a class="exercise-body--item" href="javascript:void(0)">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">Push Up</p>
-                <p class="exercise-body--subtext">Max reps in 60 sec</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="javascript:void(0)">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">Sit Ups</p>
-                <p class="exercise-body--subtext">Max reps in 60 sec</p>
-              </div>
-            </div>
-          </a>
-
-          <a class="exercise-body--item" href="javascript:void(0)">
-            <div class="flex-down-please">
-              <ion-icon
-                name="barbell-outline"
-                class="exercise-body--icon"
-              ></ion-icon>
-              <div>
-                <p class="exercise-body--heading">2.4 km Run</p>
-                <p class="exercise-body--subtext">Shortest time possible</p>
-              </div>
-            </div>
-          </a>
+        {normalExercises.map(e=>{return createExercise(e.name, e.amount)})}
+          
           <a
             onClick={(e) => {
               e.preventDefault();
