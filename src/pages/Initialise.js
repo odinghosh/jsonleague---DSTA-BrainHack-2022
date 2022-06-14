@@ -70,23 +70,7 @@ export default function () {
                         </div>
                     </div>
 
-                    <div className="line">
-                        <div>
-                            <p className="minutes-heading">Email</p>
-                            <input placeholder="barry@xyz.com" className="minutes-subtext"/>
-                        </div>
-                    </div>
-
-                    <div className="line">
-                        <div>
-                            <p className="minutes-heading">Password</p>
-                            <input
-                                placeholder="qwerty123 🤫"
-                                type="password"
-                                className="minutes-subtext"
-                            />
-                        </div>
-                    </div>
+                    
 
                     <div className="line">
                         <div>
@@ -111,8 +95,11 @@ export default function () {
 
                     <div className="line">
                         <div>
-                            <p className="minutes-heading">IPPT Target</p>
-                            <input placeholder="Gold" className="minutes-subtext"/>
+                        <label for="select-where">IPPT Target</label>
+                        <select id="select-where" required>
+                    <option value="Gold">Gold</option>
+                    <option value="Silver">Silver</option>
+                  </select>
                         </div>
                     </div>
 

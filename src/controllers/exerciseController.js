@@ -26,7 +26,7 @@ export function createExercise (exerciseName, exerciseAmount) {
 
 
 
-  export function getExerciseTypeMetaData(pageName, timeHook, targetHook){
+  export function getExerciseTypeMetaData(pageName, timeHook){
     var difficulty = 'Gold'
 
     getAllExerciseTypes(difficulty).then((response) => {
