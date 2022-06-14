@@ -163,12 +163,9 @@ export default function () {
                           navigate('../home');
                       })
                       .catch(err => {
-<<<<<<< Updated upstream
                           setwrongInput(true)
                           //Display invalid credentials
-=======
                           //Display invalid credentials on UI
->>>>>>> Stashed changes
                       })
 
               } else {
@@ -180,13 +177,10 @@ export default function () {
                       })
                       .catch(err =>
                       {
-<<<<<<< Updated upstream
                           //Display error
                           setwrongInput(true)
-                          console.log(err)
-=======
+                          //console.log(err)
                           //Display registration error on UI
->>>>>>> Stashed changes
                       })
               }
             }}
