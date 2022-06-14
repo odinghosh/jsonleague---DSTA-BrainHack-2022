@@ -11,7 +11,7 @@ export default function () {
   const [warmUpExercises, setWarmUpExercises] = useState([])
   const [normalExercises, setNormalExercises] = useState([])
   const [time, setTime] = useState('')
-  const [target, setTarget] = useState('')
+
   
   
   
@@ -19,7 +19,7 @@ export default function () {
   useEffect(() => {
     getExerciseDataUI('WarmUps', 'IPPTCircuit', setWarmUpExercises);
     getExerciseDataUI('Exercises', 'IPPTCircuit', setNormalExercises);
-    getExerciseTypeMetaData('PushUpTraining', setTime, setTarget)
+    getExerciseTypeMetaData('IPPTCircuit', setTime)
     
   } , [])
   return (

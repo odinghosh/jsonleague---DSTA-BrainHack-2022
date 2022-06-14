@@ -68,11 +68,10 @@ export async function getExercisesByType(type, difficulty, ExerciseType) {
 export async function getAllExerciseTypes(difficulty) {
     try {
         const querySnapshot = await getDocs(collection(firestoreDB, "WorkoutDifficulty/" + difficulty + "/ExerciseTypeList"))
-        let exercise_data = []
+        let exercise_data = {}
         querySnapshot.forEach(doc => {
         
-            var jsondata = {...doc.data(), name:doc.id}
-            exercise_data.push(jsondata)
+            exercise_data[doc.id] = doc.data()
         })
         //console.log(exercise_data)
         return exercise_data

@@ -9,14 +9,14 @@ export default function (props) {
   const [warmUpExercises, setWarmUpExercises] = useState([])
   const [normalExercises, setNormalExercises] = useState([])
   const [time, setTime] = useState('')
-  const [target, setTarget] = useState('')
+
   const navigate = useNavigate();
   
   
   useEffect(() => {
     getExerciseDataUI('WarmUps', 'PushUpTraining', setWarmUpExercises);
     getExerciseDataUI('Exercises', 'PushUpTraining', setNormalExercises);
-    getExerciseTypeMetaData('PushUpTraining', setTime, setTarget)
+    getExerciseTypeMetaData('PushUpTraining', setTime)
     
   } , [])
 
@@ -49,7 +49,7 @@ export default function (props) {
             <p class="exercise--subtext time">
               Time <br />
               <ion-icon class="icon" name="stopwatch-outline"></ion-icon>
-              <span> 50 mins </span>
+              <span> {time} mins </span>
             </p>
             <p class="exercise--subtext target">
               Target <br />

@@ -28,13 +28,11 @@ export function createExercise (exerciseName, exerciseAmount) {
 
   export function getExerciseTypeMetaData(pageName, timeHook, targetHook){
     var difficulty = 'Gold'
+
     getAllExerciseTypes(difficulty).then((response) => {
-      for (var item in response){
-        console.log(item)
-        if(item.name === pageName){
-          timeHook(item.time)
-        }
-      }
+      console.log(response)
+      timeHook(response[pageName].time)
+     
     })
 
   }
