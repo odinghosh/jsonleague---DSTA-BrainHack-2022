@@ -6,6 +6,8 @@ export async function login(username, password){
 }
 
 export async function register(username, password){
-    return await authenticationDAO.register(username, password)
+    var generatedUID =  await authenticationDAO.register(username, password)
+    authenticationDAO.addNewUser(generatedUID)
+    return generatedUID
 }
  
