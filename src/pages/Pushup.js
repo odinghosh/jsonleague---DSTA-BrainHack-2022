@@ -3,17 +3,20 @@ import '../styles/exerciseStyles.css';
 import '../styles/general.css';
 import pushUpImg from './push-up-img.jpg';
 import { useNavigate } from 'react-router-dom';
-import { createExercise, getExerciseDataUI } from '../controllers/exerciseController';
+import { createExercise, getExerciseDataUI, getExerciseTypeMetaData } from '../controllers/exerciseController';
 
 export default function (props) {
   const [warmUpExercises, setWarmUpExercises] = useState([])
   const [normalExercises, setNormalExercises] = useState([])
+  const [time, setTime] = useState('')
+  const [target, setTarget] = useState('')
   const navigate = useNavigate();
   
   
   useEffect(() => {
     getExerciseDataUI('WarmUps', 'PushUpTraining', setWarmUpExercises);
     getExerciseDataUI('Exercises', 'PushUpTraining', setNormalExercises);
+    getExerciseTypeMetaData('PushUpTraining', setTime, setTarget)
     
   } , [])
 

@@ -1,5 +1,6 @@
 import React from 'react'
-import { getExercisesByType } from '../models/firestoreDAO'
+import { getExercisesByType, getAllExerciseTypes } from '../models/firestoreDAO'
+import Cookies from 'universal-cookie';
 
 
 
@@ -22,13 +23,36 @@ export function createExercise (exerciseName, exerciseAmount) {
   }
 
   // function gets all the exercises for the desired target for all exercise sub category
-  export async function getAllExerciseTypes(difficulty){
-    return await getAllExerciseTypes(difficulty)
+
+
+
+  export function getExerciseTypeMetaData(pageName, timeHook, targetHook){
+    var difficulty = 'Gold'
+    getAllExerciseTypes(difficulty).then((response) => {
+      for (var item in response){
+        console.log(item)
+        if(item.name === pageName){
+          timeHook(item.time)
+        }
+      }
+    })
+
   }
 
 
   export function getExerciseDataUI(type,pageName, stateHook){
-    getExercisesByType(type, 'Gold', pageName).then((response)=>{
+    const cookies = new Cookies();
+    var uid = cookies.get('uid');
+    uid = cookies.get('uid')
+    var difficulty = 'Gold'
+    if(uid == ''){
+
+    }
+
+
+    
+
+    getExercisesByType(type, difficulty, pageName).then((response)=>{
       console.log(response)
       stateHook(response)
     })

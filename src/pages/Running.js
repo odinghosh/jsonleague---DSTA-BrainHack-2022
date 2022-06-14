@@ -3,19 +3,22 @@ import '../styles/exerciseStyles.css';
 import '../styles/general.css';
 import runningImg from './running-img.jpg';
 import { useNavigate } from 'react-router-dom';
-import { createExercise, getExerciseDataUI } from '../controllers/exerciseController';
+import { createExercise, getExerciseDataUI, getExerciseTypeMetaData } from '../controllers/exerciseController';
 
 export default function () {
   const navigate = useNavigate();
 
   const [warmUpExercises, setWarmUpExercises] = useState([])
   const [normalExercises, setNormalExercises] = useState([])
+  const [time, setTime] = useState('')
+  const [target, setTarget] = useState('')
   
   
   
   useEffect(() => {
     getExerciseDataUI('WarmUps', 'RunningTraining', setWarmUpExercises);
     getExerciseDataUI('Exercises', 'RunningTraining', setNormalExercises);
+    getExerciseTypeMetaData('PushUpTraining', setTime, setTarget)
     
   } , [])
   return (

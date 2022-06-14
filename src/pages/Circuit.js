@@ -3,7 +3,7 @@ import '../styles/exerciseStyles.css';
 import '../styles/general.css';
 import ipptImg from './ippt-img.jpg';
 import { useNavigate } from 'react-router-dom';
-import { createExercise, getExerciseDataUI } from '../controllers/exerciseController';
+import { createExercise, getExerciseDataUI, getExerciseTypeMetaData} from '../controllers/exerciseController';
 
 export default function () {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ export default function () {
   const [warmUpExercises, setWarmUpExercises] = useState([])
   const [normalExercises, setNormalExercises] = useState([])
   const [time, setTime] = useState('')
+  const [target, setTarget] = useState('')
   
   
   
@@ -18,6 +19,7 @@ export default function () {
   useEffect(() => {
     getExerciseDataUI('WarmUps', 'IPPTCircuit', setWarmUpExercises);
     getExerciseDataUI('Exercises', 'IPPTCircuit', setNormalExercises);
+    getExerciseTypeMetaData('PushUpTraining', setTime, setTarget)
     
   } , [])
   return (
@@ -47,7 +49,7 @@ export default function () {
             <p class="exercise--subtext time">
               Time <br />
               <ion-icon class="icon" name="stopwatch-outline"></ion-icon>
-              <span> 50 mins </span>
+              <span> {time} mins </span>
             </p>
             <p class="exercise--subtext target">
               Target <br />
