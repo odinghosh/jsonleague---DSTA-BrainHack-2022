@@ -10,7 +10,7 @@ import '../styles/pushupPosture.css'
 import '../styles/general.css'
 
 import {useSpeechSynthesis} from 'react-speech-kit'
-import { Navigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 
 export default function()  {
