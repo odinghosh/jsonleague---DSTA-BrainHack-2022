@@ -95,7 +95,7 @@ export default function () {
 
                     <div className="line">
                         <div>
-                        <label for="select-where">IPPT Target</label>
+                        <label className='minutes-heading' for="select-where">IPPT Target</label>
                         <select id="select-where" required>
                     <option value="Gold">Gold</option>
                     <option value="Silver">Silver</option>

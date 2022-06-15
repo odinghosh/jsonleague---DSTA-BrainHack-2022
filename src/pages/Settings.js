@@ -1,16 +1,24 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState, useRef} from 'react';
+import { useNavigate} from 'react-router-dom';
 
 import '../styles/SettingsStyle.css';
 import '../styles/general.css';
 import '../styles/queries.css';
 import pfpImg from './pfp.png';
+import Cookies from 'universal-cookie';
 
-export default function () {
+
+export default function () { 
+    const cookies = new Cookies()
+    const nameRef = useRef(null)
   const navigate = useNavigate();
+  const [name, setName] = useState('')
+  const [difficulty, setDifficulty] = useState('Gold')
   return (
     <div>
-      <div className="settings-utility-bar container">
+      <div onClick={(e) => {
+        navigate('../home')
+      }} className="settings-utility-bar container">
         <ion-icon
           class="settings-utility-icon"
           name="chevron-back-outline"
@@ -21,7 +29,7 @@ export default function () {
         <img className="settings-user-profile-pfp" src={pfpImg} alt="my nft" />
 
         <div className="settings-home-greeting">
-          <p className="settings-home--header">Dread Scientist</p>
+          <p className="settings-home--header">{cookies.get('name')}</p>
           <p className="settings-home--subtext">FREE</p>
         </div>
       </div>
@@ -31,9 +39,16 @@ export default function () {
           <div className="line">
             <div>
               <p className="minutes-heading">Display Name</p>
-              <p className="minutes-subtext">Dread Scientist</p>
+              <p ref={nameRef} contentEditable='true' className="minutes-subtext">{cookies.get('name')}</p>
             </div>
-            <button className="edit-btn btn">Edit</button>
+            <button onClick={(e) => {
+                console.log(nameRef.current.innerText)
+                
+                cookies.set('name', nameRef.current.innerText, {path:'/'})
+
+              
+
+            }} className="edit-btn btn">Edit</button>
           </div>
 
           <form className="line">
@@ -80,13 +95,26 @@ export default function () {
             <button className="edit-btn btn">Edit</button>
           </div>
 
+
           <div className="line">
-            <div>
-              <p className="minutes-heading">IPPT Target</p>
-              <p className="minutes-subtext">Gold</p>
-            </div>
-            <button className="edit-btn btn">Edit</button>
-          </div>
+                        <div>
+                        <label className='minutes-heading' for="select-where">IPPT Target</label>
+                        <select onChange={(e) => { setDifficulty(e.target.value) }} id="select-where" required>
+                   
+                    <option value="Gold">Gold</option>
+                    <option value="Silver">Silver</option>
+                  </select>
+                        </div>
+                        <button onClick={(e)=>{
+                            const cookies = new Cookies()
+                            cookies.set('difficulty', difficulty, {path:'/'})
+                            console.log(difficulty)
+
+                        }}  className="edit-btn btn">Edit</button>
+
+                    </div>
+
+      
 
           <div className="line">
             <div>
@@ -111,7 +139,12 @@ export default function () {
       </div>
 
       <div className="container">
-        <button className="submit edit-btn btn">Sign Out</button>
+        <button onClick={(e) => {
+            const cookies = new Cookies()
+            cookies.remove('uid')
+            navigate('../')
+
+        }} className="submit edit-btn btn">Sign Out</button>
       </div>
     </div>
   );

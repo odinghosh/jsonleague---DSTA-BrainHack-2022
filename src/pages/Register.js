@@ -180,7 +180,7 @@ export default function () {
                       .then((user) => {
                           cookies.set('uid', user.uid, { path: '/' });
                           //console.log(cookies.get('uid'))
-                          navigate('../home', { replace: true });
+                          navigate('../initalise', { replace: true });
                       })
                       .catch(err =>
                       {

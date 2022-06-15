@@ -29,6 +29,12 @@ export function createExercise (exerciseName, exerciseAmount) {
   export function getExerciseTypeMetaData(pageName, timeHook){
     var difficulty = 'Gold'
 
+    const cookies = new Cookies()
+    var savedDifficulty = cookies.get('difficulty')
+    if(savedDifficulty.length > 0){
+      difficulty = savedDifficulty
+    }
+
     getAllExerciseTypes(difficulty).then((response) => {
       console.log(response)
       timeHook(response[pageName].time)
@@ -39,16 +45,14 @@ export function createExercise (exerciseName, exerciseAmount) {
 
 
   export function getExerciseDataUI(type,pageName, stateHook){
-    const cookies = new Cookies();
-    var uid = cookies.get('uid');
-    uid = cookies.get('uid')
     var difficulty = 'Gold'
-    if(uid == ''){
 
+    const cookies = new Cookies()
+    var savedDifficulty = cookies.get('difficulty')
+    if(savedDifficulty.length > 0){
+      difficulty = savedDifficulty
     }
 
-
-    
 
     getExercisesByType(type, difficulty, pageName).then((response)=>{
       console.log(response)

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/HomeStyle.css';
 import '../styles/general.css';
 import '../styles/queries.css';
@@ -18,12 +18,16 @@ const cookies = new Cookies();
 export default function () {
   const navigate = useNavigate();
 
+  const [name, setName] = useState('Default Name')
+
   useEffect(() => {
     var uid = cookies.get('uid');
     if (!uid) {
     }
     console.log(uid);
     getUserRecord(uid).then().catch();
+
+    setName(cookies.get('name'))
 
     //getExercisesByType("WarmUps", "Gold", "IPPTCircuit").then().catch()
     //getAllExerciseTypes("Gold").then().catch()
@@ -42,10 +46,13 @@ if (uid) {
       <div className="home-home-heading container">
         <div className="home-home-greeting">
           <p className="home-home-subtext">Glad to see you again!</p>
-          <p className="home-home-header">Dreaded Scientist</p>
+          <p className="home-home-header">{name}</p>
         </div>
         <a>
-          <img src={pfp} class="home-user-profile-pfp "></img>
+        
+          <img onClick={(e) => {
+            navigate('../settings')
+          }} src={pfp} class="home-user-profile-pfp "/>
         </a>
       </div>
 
