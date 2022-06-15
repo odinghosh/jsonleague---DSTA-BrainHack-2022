@@ -10,11 +10,13 @@ import '../styles/pushupPosture.css'
 import '../styles/general.css'
 
 import {useSpeechSynthesis} from 'react-speech-kit'
+import { useNavigate } from "react-router-dom"
 
 
 export default function()  {
 
   const[detected, setDetected] = useState(false)
+  const navigate = useNavigate();
  
 
   const [windowSize, setWindowSize] = useState({width: window.innerWidth, height: window.innerHeight})
@@ -184,7 +186,10 @@ function handleResize(){
 
     return <div style={{height:windowSize.height, width:windowSize.width}} className={!detected? 'starting' : prevStatus? 'correct':'wrong'} >
     <div class="posture-heading container">
-      <a href="#">
+      <a onClick={(e)=>{
+        e.preventDefault();
+        navigate('../home')
+      }}href="#">
         <ion-icon class="utility-icon" name="chevron-back-outline"></ion-icon>
       </a>
       <div class="posture-greeting">
