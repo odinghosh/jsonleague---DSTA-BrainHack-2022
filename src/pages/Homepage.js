@@ -27,7 +27,11 @@ export default function () {
     console.log(uid);
     getUserRecord(uid).then().catch();
 
-    setName(cookies.get('name'))
+    if(cookies.get('name')){
+      setName(cookies.get('name'))
+    } else {
+      setName('Odin')
+    }
 
     //getExercisesByType("WarmUps", "Gold", "IPPTCircuit").then().catch()
     //getAllExerciseTypes("Gold").then().catch()
