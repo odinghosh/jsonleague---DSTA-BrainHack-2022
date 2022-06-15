@@ -3,43 +3,43 @@ import '../styles/exerciseStyles.css';
 import '../styles/general.css';
 import pushUpImg from './push-up-img.jpg';
 import { useNavigate } from 'react-router-dom';
-import { createExercise, getExerciseDataUI, getExerciseTypeMetaData } from '../controllers/exerciseController';
+import {
+  createExercise,
+  getExerciseDataUI,
+  getExerciseTypeMetaData,
+} from '../controllers/exerciseController';
 
 export default function (props) {
-  const [warmUpExercises, setWarmUpExercises] = useState([])
-  const [normalExercises, setNormalExercises] = useState([])
-  const [time, setTime] = useState('')
+  const [warmUpExercises, setWarmUpExercises] = useState([]);
+  const [normalExercises, setNormalExercises] = useState([]);
+  const [time, setTime] = useState('');
 
   const navigate = useNavigate();
-  
-  
+
   useEffect(() => {
     getExerciseDataUI('WarmUps', 'PushUpTraining', setWarmUpExercises);
     getExerciseDataUI('Exercises', 'PushUpTraining', setNormalExercises);
-    getExerciseTypeMetaData('PushUpTraining', setTime)
-    
-  } , [])
+    getExerciseTypeMetaData('PushUpTraining', setTime);
+  }, []);
 
-
-  
   return (
     <div class="parent-div">
-      <img class="exercise-img" src={pushUpImg} alt="girl doing push up" />
+      <img class="ex-exercise-img" src={pushUpImg} alt="girl doing push up" />
 
       <div class="moving-thing">
-        <div class="exercise-heading exercise-container">
-          <div class="utility-bar">
+        <div class="ex-exercise-heading exercise-container">
+          <div class="ex-utility-bar">
             <ion-icon
               onClick={(e) => {
                 e.preventDefault();
                 navigate('../home');
               }}
-              class="utility-icon"
+              class="ex-utility-icon"
               name="chevron-back-outline"
             ></ion-icon>
 
             <ion-icon
-              class="utility-icon"
+              class="ex-utility-icon"
               name="ellipsis-vertical-outline"
             ></ion-icon>
           </div>
@@ -64,9 +64,9 @@ export default function (props) {
         </h1>
 
         <div class="exercise-body-menu">
-
-          {(warmUpExercises).map((e)=>{return createExercise(e.name, e.amount)})}
-          
+          {warmUpExercises.map((e) => {
+            return createExercise(e.name, e.amount);
+          })}
         </div>
 
         <h1 class="exercise-body-header exercise-container">
@@ -74,9 +74,10 @@ export default function (props) {
         </h1>
 
         <div class="exercise-body-menu">
+          {normalExercises.map((e) => {
+            return createExercise(e.name, e.amount);
+          })}
 
-          {normalExercises.map(e=>{return createExercise(e.name, e.amount)})}
-          
           <a
             onClick={(e) => {
               e.preventDefault();
