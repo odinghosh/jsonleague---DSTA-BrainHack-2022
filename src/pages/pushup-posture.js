@@ -145,7 +145,7 @@ function handleResize(){
         
                 
 
-           if(LS.score > 0.3 && LH.score > 0.3 && LK.score > 0.3){
+           if(LS.score > 0.2 && LH.score > 0.2 && LK.score > 0.2){
             setDetected(true)
               var radians = Math.atan2(LK.y - LH.y, LK.x - LH.x) - Math.atan2(LS.y - LH.y, LS.x - LH.x)
             var angle = (Math.abs(radians*(180.0/Math.PI)))
