@@ -158,7 +158,7 @@ export default function () {
           </div>
         )}
 
-        <div class="btn-login">
+        <div className={registered? "btn--login":"btn--register"}>
           <a
             onClick={() => {
               if (registered) {
