@@ -31,7 +31,7 @@ export function createExercise (exerciseName, exerciseAmount) {
 
     const cookies = new Cookies()
     var savedDifficulty = cookies.get('difficulty')
-    if(savedDifficulty.length > 0){
+    if(savedDifficulty){
       difficulty = savedDifficulty
     }
 
@@ -49,7 +49,7 @@ export function createExercise (exerciseName, exerciseAmount) {
 
     const cookies = new Cookies()
     var savedDifficulty = cookies.get('difficulty')
-    if(savedDifficulty.length > 0){
+    if(savedDifficulty){
       difficulty = savedDifficulty
     }
 

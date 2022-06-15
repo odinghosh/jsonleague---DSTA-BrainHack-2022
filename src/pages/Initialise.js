@@ -1,5 +1,6 @@
-import React from 'react';
+import React,{useState, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 import '../styles/InitialiseStyle.css';
 import '../styles/general.css';
@@ -9,6 +10,11 @@ import homepage from "./Homepage";
 
 export default function () {
     const navigate = useNavigate();
+    const cookies = new Cookies()
+    const nameRef = useRef(null)
+
+  const [name, setName] = useState('')
+  const [difficulty, setDifficulty] = useState('Gold')
     return (
         <html lang="en">
         <head>
@@ -60,13 +66,20 @@ export default function () {
             </div>
         </div>
 
-        <form className="submit-form" name="sign-up" netlify>
+        <form onSubmit={(e)=>{
+            e.preventDefault();
+            cookies.set('name', name, {path:'/'})
+            cookies.set('difficulty', difficulty, {path:'/'})
+            navigate('../home')
+        }} className="submit-form" name="sign-up" netlify>
             <div className="container less-padding">
                 <div className="edit-container">
                     <div className="line">
                         <div>
                             <p className="minutes-heading">Display Name</p>
-                            <input className="minutes-subtext" placeholder="Barry"/>
+                            <input onChange={(e)=> {
+                                setName(e.target.value)
+                            }} className="minutes-subtext" placeholder="Barry"/>
                         </div>
                     </div>
 
@@ -96,7 +109,9 @@ export default function () {
                     <div className="line">
                         <div>
                         <label className='minutes-heading' for="select-where">IPPT Target</label>
-                        <select id="select-where" required>
+                        <select onChange={(e) => {
+                            setDifficulty(e.target.value)
+                        }} id="select-where" required>
                     <option value="Gold">Gold</option>
                     <option value="Silver">Silver</option>
                   </select>
