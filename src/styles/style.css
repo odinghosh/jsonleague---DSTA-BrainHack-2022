@@ -17,14 +17,16 @@ body {
 
 .white-back {
   background-color: white;
+  /* z-index: -1; */
 }
 
 .login-heading {
-  padding: 7rem 9rem 0rem 9rem;
+  padding: 7rem 9rem 1.3rem 9rem;
   background-color: white;
 }
 
 .heading {
+  /* z-index: 1; */
   font-size: 8rem;
   letter-spacing: -1.8px;
 }
@@ -131,7 +133,7 @@ body {
   font-size: 3.5rem !important;
   color: #fdf2e9;
 
-  background-color: #c42e4a;
+  background-color: #6c63ff;
 
   position: relative;
   padding-right: 10rem;
@@ -140,27 +142,19 @@ body {
   width: 35rem;
 }
 
-.btn--register:focus {
-  box-shadow: 0 0 0 0.8rem rgba(252, 102, 130, 0.4) !important;
-}
-
 .btn--login {
   text-align: left;
   text-transform: uppercase;
   font-size: 3.5rem !important;
   color: #fdf2e9;
 
-  background-color: #c42e4a;
+  background-color: #6c63ff;
 
   position: relative;
   padding-right: 10rem;
   align-self: right;
 
   width: 30rem;
-}
-
-.btn--login:focus {
-  box-shadow: 0 0 0 0.8rem rgba(252, 102, 130, 0.4) !important;
 }
 
 .btn--img {
@@ -176,16 +170,11 @@ body {
   font-size: 3.2rem;
   text-align: center;
   font-weight: 800;
-  color: #3f5a99;
 }
 
 .login-footer--sign-up:link,
 .login-footer--sign-up:visited {
   text-decoration: none;
-  color: #c42e4a;
+  color: #6c63ff;
   transition: all 0.3sec;
-}
-
-.login-footer--sign-up:focus {
-  box-shadow: 0 0 0 0.8rem rgba(252, 102, 130, 0.4) !important;
 }
