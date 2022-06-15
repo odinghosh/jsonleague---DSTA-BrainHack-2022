@@ -27,6 +27,10 @@ export default function () {
         ></ion-icon>
       </div>
 
+      <div class="container">
+        <p class="header-header-header">Settings</p>
+      </div>
+
       <div className="settings-home-heading container">
         <img className="settings-user-profile-pfp" src={pfpImg} alt="my nft" />
 
@@ -154,7 +158,7 @@ export default function () {
             cookies.remove('uid');
             navigate('../');
           }}
-          className="submit edit-btn btn"
+          className="submit-now-please edit-btn btn"
         >
           Sign Out
         </button>
