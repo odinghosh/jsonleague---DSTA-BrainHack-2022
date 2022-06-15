@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import trainerImage from './personal-training-loginpage.svg';
 import Cookies from 'universal-cookie';
-import * as authenticationController from '../controllers/authenticationController'
+import * as authenticationController from '../controllers/authenticationController';
 
 import '../styles/style.css';
 import '../styles/general.css';
@@ -15,31 +15,29 @@ export default function () {
   const [registered, setRegistered] = useState(true);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [wrongInput, setwrongInput] = useState(false)
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [wrongInput, setwrongInput] = useState(false);
   const [confirm_password, check_confirm_password] = useState(false);
-
 
   const navigate = useNavigate();
 
   // This block of code will run only once when the page is rendered
   useEffect(() => {
     //checking if a person is authenticated already
-      
+
     var uid = cookies.get('uid');
     if (uid) {
       navigate('../home');
     }
   }, []);
 
-
-  useEffect(()=> {
-    if(password === confirmPassword){
-      check_confirm_password(false)
+  useEffect(() => {
+    if (password === confirmPassword) {
+      check_confirm_password(false);
     } else {
-      check_confirm_password(true)
+      check_confirm_password(true);
     }
-  }, [password, confirmPassword])
+  }, [password, confirmPassword]);
 
   return (
     <div>
@@ -49,7 +47,7 @@ export default function () {
         </div>
       </div>
       <div class="login-heading">
-        <p class="heading">{registered? 'Sign In' : 'Create Account'}</p>
+        <p class="heading">{registered ? 'Sign In' : 'Create Account'}</p>
       </div>
 
       <svg
@@ -85,9 +83,11 @@ export default function () {
           <div>
             <div class="input-password">
               <input
-                onClick={(e) => {setwrongInput(false)}}
+                onClick={(e) => {
+                  setwrongInput(false);
+                }}
                 id="password"
-                className={wrongInput && "wrong-entry"}
+                className={wrongInput && 'wrong-entry'}
                 type="password"
                 placeholder="password"
                 name="password"
@@ -101,8 +101,8 @@ export default function () {
               ></ion-icon>
             </div>
 
-           <p class="login-password-state">
-              {wrongInput?  'Incorrect Username and/or Password':''}
+            <p class="login-password-state">
+              {wrongInput ? 'Incorrect Username and/or Password' : ''}
             </p>
           </div>
         )}
@@ -110,15 +110,18 @@ export default function () {
         {!registered && (
           <div class="input-password">
             <input
-            onClick={(e) => {setwrongInput(false)}}
+              onClick={(e) => {
+                setwrongInput(false);
+              }}
               id="password"
-              className={wrongInput && "wrong-entry"}
+              className={wrongInput && 'wrong-entry'}
               type="password"
               placeholder="password"
               name="password"
-              value = {password}
+              value={password}
               required
-              onChange={(e) => {setPassword(e.target.value); 
+              onChange={(e) => {
+                setPassword(e.target.value);
               }}
             />
 
@@ -133,15 +136,17 @@ export default function () {
           <div>
             <div class="input-confirm-password">
               <input
-              onClick={(e) => {setwrongInput(false)}}
+                onClick={(e) => {
+                  setwrongInput(false);
+                }}
                 id="confirm-password"
-                className={wrongInput && "wrong-entry"}
+                className={wrongInput && 'wrong-entry'}
                 type="password"
                 placeholder=" confirm password"
                 name="password"
-                value = {confirmPassword}
+                value={confirmPassword}
                 onChange={(e) => {
-                  setConfirmPassword(e.target.value)
+                  setConfirmPassword(e.target.value);
                 }}
                 required
               />
@@ -151,82 +156,87 @@ export default function () {
                 class="input-img input-img--confirm-password"
               ></ion-icon>
             </div>
-            
+
             <p class="register-password-state">
-              {confirm_password? 'Passwords do not match': ''}
+              {confirm_password ? 'Passwords do not match' : ''}
             </p>
           </div>
         )}
-
-        <div className={registered? "btn--login":"btn--register"}>
-          <a
-            onClick={() => {
-              if (registered) {
-                  console.log('Initiating logging in')
-                  authenticationController.login(email, password)
-                      .then(user => {
-                          cookies.set('uid', user.uid, { path: '/' });
-                          //console.log(cookies.get('uid'))
-                          navigate('../home');
-                      })
-                      .catch(err => {
-                          setwrongInput(true)
-                          //Display invalid credentials
-                          //Display invalid credentials on UI
-                      })
-
-              } else {
-                  authenticationController.register(email, password)
-                      .then((user) => {
-                          cookies.set('uid', user.uid, { path: '/' });
-                          //console.log(cookies.get('uid'))
-                          navigate('../initialise', { replace: true });
-                      })
-                      .catch(err =>
-                      {
-                          //Display error
-                          setwrongInput(true)
-                          //console.log(err)
-                          //Display registration error on UI
-                      })
-              }
-            }}
-            href="#"
-            class="btn btn--register"
+        <div class="btn-login">
+          <div
+            className={registered ? ' btn btn--login ' : '  btn btn--register'}
           >
-            {!registered ? 'Register' : 'login'}
+            <p
+              onClick={() => {
+                if (registered) {
+                  console.log('Initiating logging in');
+                  authenticationController
+                    .login(email, password)
+                    .then((user) => {
+                      cookies.set('uid', user.uid, { path: '/' });
+                      //console.log(cookies.get('uid'))
+                      navigate('../home');
+                    })
+                    .catch((err) => {
+                      setwrongInput(true);
+                      //Display invalid credentials
+                      //Display invalid credentials on UI
+                    });
+                } else {
+                  authenticationController
+                    .register(email, password)
+                    .then((user) => {
+                      cookies.set('uid', user.uid, { path: '/' });
+                      //console.log(cookies.get('uid'))
+                      navigate('../initialise', { replace: true });
+                    })
+                    .catch((err) => {
+                      //Display error
+                      setwrongInput(true);
+                      //console.log(err)
+                      //Display registration error on UI
+                    });
+                }
+              }}
+            >
+              {!registered ? 'Register' : 'login'}
 
-            <ion-icon name="arrow-forward-outline" class="btn--img"></ion-icon>
-          </a>
+              <ion-icon
+                name="arrow-forward-outline"
+                class="btn--img"
+              ></ion-icon>
+            </p>
+          </div>
         </div>
       </form>
 
-      {(!registered)?
-      <p class="login-footer">
-        Already have an account?&nbsp;
-        <a
-          href="#"
-          class="login-footer--sign-up"
-          onClick={() => {
-            setRegistered(!registered);
-          }}
-        >
-          Sign In
-        </a>
-      </p>:<p class="login-footer">
-        Don't have an account?&nbsp;
-        <a
-          href="#"
-          class="login-footer--sign-up"
-          onClick={() => {
-            setRegistered(!registered);
-          }}
-        >
-          Register
-        </a>
-      </p>
-
-        }
+      {!registered ? (
+        <p class="login-footer">
+          Already have an account?&nbsp;
+          <a
+            href="#"
+            class="login-footer--sign-up"
+            onClick={() => {
+              setRegistered(!registered);
+            }}
+          >
+            Sign In
+          </a>
+        </p>
+      ) : (
+        <p class="login-footer">
+          Don't have an account?&nbsp;
+          <a
+            href="#"
+            class="login-footer--sign-up"
+            onClick={() => {
+              setRegistered(!registered);
+            }}
+          >
+            Register
+          </a>
+        </p>
+      )}
     </div>
   );
 }
