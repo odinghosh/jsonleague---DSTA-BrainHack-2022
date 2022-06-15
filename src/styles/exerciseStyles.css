@@ -4,12 +4,12 @@ html {
   overflow-x: visible;
 }
 
-.exercise-heading .utility-bar {
+.ex-exercise-heading .ex-utility-bar {
   display: flex;
   justify-content: space-between;
 }
 
-.utility-icon {
+.ex-utility-icon {
   width: 5rem;
   height: 5rem;
   color: #6c63ff;
@@ -21,7 +21,7 @@ html {
   background-color: white;
 }
 
-.exercise-img {
+.ex-exercise-img {
   background-size: contain;
   width: 100%;
   height: auto;
@@ -52,8 +52,9 @@ html {
   padding-bottom: 3rem;
 }
 
-.exercise-heading {
+.ex-exercise-heading {
   padding-top: 4rem;
+  padding-bottom: 4rem;
   letter-spacing: -1.8px;
   align-self: center;
 
